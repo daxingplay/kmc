@@ -1,4 +1,4 @@
-## 2012.08.28, Version 0.3.7(Stable)
+## 2012.08.28, Version 0.0.1(Stable)
 
 ### bug fix
 
