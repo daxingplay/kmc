@@ -2,8 +2,8 @@
     path = require('path');
 
 // test charset setting. from utf-8 sources to gbk distribution.
-var sourcePath = path.resolve(__dirname, './complier-test/src'),
-    distPath = path.resolve(__dirname, './complier-test/dist');
+var sourcePath = path.resolve(__dirname, './cases/src'),
+    distPath = path.resolve(__dirname, './cases/dist');
 ModuleCompiler.config({
     packages: [
         {
