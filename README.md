@@ -44,7 +44,7 @@ or
 
 *Advanced Example:*
 
-    var ModuleComplier = require('tbuild').ModuleComplier;
+    var ModuleComplier = require('module-compiler');
 
     // 这里和KISSY.config一样，先配置包
     ModuleComplier.config({
