@@ -10,14 +10,14 @@ or
     git clone git://github.com/daxingplay/ModuleCompiler.git
 
 
-### ModuleComplier
+### ModuleCompiler
 
 *Example:*
 
-    var ModuleComplier = require('tbuild').ModuleComplier;
+    var ModuleCompiler = require('module-compiler');
 
     // 这里和KISSY.config一样，先配置包
-    ModuleComplier.config({
+    ModuleCompiler.config({
         packages: [{
             'name': 'sh',
             'path': '这里建议写绝对路径',
@@ -25,12 +25,12 @@ or
         }]
     });
 
-    ModuleComplier.build('xxx.js', 'xxx.combine.js');
+    ModuleCompiler.build('xxx.js', 'xxx.combine.js');
 
 *API:*
 
-    ModuleComplier.config(cfg);
-    ModuleComplier.build(inputPath, outputPath);
+    ModuleCompiler.config(cfg);
+    ModuleCompiler.build(inputPath, outputPath);
 
 * cfg:{Object} 参数
 
@@ -44,10 +44,10 @@ or
 
 *Advanced Example:*
 
-    var ModuleComplier = require('module-compiler');
+    var ModuleCompiler = require('module-compiler');
 
     // 这里和KISSY.config一样，先配置包
-    ModuleComplier.config({
+    ModuleCompiler.config({
         packages: [{
             'name': 'app1',
             'path': '这里写绝对路径',
@@ -67,7 +67,7 @@ or
         charset: 'gbk'
     });
 
-    ModuleComplier.build('xxx.js', 'xxx.combine.js');
+    ModuleCompiler.build('xxx.js', 'xxx.combine.js');
 
 ## License
 遵守 "MIT"：https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md 协议
