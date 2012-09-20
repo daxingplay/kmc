@@ -14,6 +14,7 @@ ModuleCompiler.config({
         }
     ],
     suffix: '',
+    exclude: 'mod9999',
     // output to gbk distribution
     charset: 'gbk'
 });
@@ -55,4 +56,4 @@ ModuleCompiler.config({
 
 ModuleCompiler.build(path.resolve(sourcePath, app3 + '/init.js'), path.resolve(distPath, app3 + '/init.js'));
 
-
+ModuleCompiler.clean();
