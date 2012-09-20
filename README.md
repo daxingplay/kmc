@@ -30,7 +30,8 @@ or
 *API:*
 
     ModuleCompiler.config(cfg);
-    ModuleCompiler.build(inputPath, outputPath);
+    ModuleCompiler.analyze(inputPath);
+    ModuleCompiler.build(inputPath, outputPath, outputCharset);
 
 * cfg:{Object} 参数
 
@@ -41,6 +42,7 @@ or
 
 * inputPath: {String} 需要打包的文件路径或者目录
 * outputPath: {String} 需要输出的文件路径
+* outputCharset: {String} 输出编码
 
 *Advanced Example:*
 

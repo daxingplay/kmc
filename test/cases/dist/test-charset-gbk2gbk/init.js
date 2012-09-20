@@ -16,7 +16,7 @@ KISSY.add('test-charset-gbk2gbk/mods/mod1',function (S) {
 
     return {
         init:function () {
-            S.log('ÕâÊÇGBKÎÄ¼ş£¬ÄãºÃ£¬ÊÀ½ç£¡');
+            S.log('è¿™æ˜¯GBKæ–‡ä»¶ï¼Œä½ å¥½ï¼Œä¸–ç•Œï¼');
         }
     }
 });/**
@@ -48,7 +48,7 @@ KISSY.add('test-charset-gbk2gbk/init',function (S) {
                 S.log(e, 'dir');
             }
         }
-        S.log('ÎÒÓÃÁ½ÖÖÓïÑÔsay hello£¬Äã¿´µ½ÁËÂğ£¿ÕâÊÇGBKµÄÎÄ¼şÅ¶¡«');
+        S.log('æˆ‘ç”¨ä¸¤ç§è¯­è¨€say helloï¼Œä½ çœ‹åˆ°äº†å—ï¼Ÿè¿™æ˜¯GBKçš„æ–‡ä»¶å“¦ï½');
     });
 
 }, {

@@ -35,7 +35,7 @@ KISSY.add('test-charset/mods/mod2',function (S) {
 
     return {
         init:function () {
-            S.log(LOG_PRE + 'ÄãºÃ£¬ÊÀ½ç');
+            S.log(LOG_PRE + 'ä½ å¥½ï¼Œä¸–ç•Œ');
         }
     }
 });/**
@@ -54,7 +54,7 @@ KISSY.add('test-charset/init',function (S) {
                 S.log(e, 'dir');
             }
         }
-        S.log('ÎÒÓÃÁ½ÖÖÓïÑÔsay hello£¬Äã¿´µ½ÁËÂğ£¿');
+        S.log('æˆ‘ç”¨ä¸¤ç§è¯­è¨€say helloï¼Œä½ çœ‹åˆ°äº†å—ï¼Ÿ');
     });
 
 }, {

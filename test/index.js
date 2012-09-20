@@ -36,3 +36,23 @@ ModuleCompiler.config({
 });
 
 ModuleCompiler.build(path.resolve(sourcePath, app2 + '/init.js'), path.resolve(distPath, app2 + '/init.js'));
+
+
+var app3 = 'circular-requires';
+ModuleCompiler.config({
+    packages: [
+        {
+            name: app3,
+            path: sourcePath,
+            // this charset specifies source file charset.
+            charset: 'gbk'
+        }
+    ],
+    suffix: '',
+    // output to gbk distribution
+    charset: 'gbk'
+});
+
+ModuleCompiler.build(path.resolve(sourcePath, app3 + '/init.js'), path.resolve(distPath, app3 + '/init.js'));
+
+
