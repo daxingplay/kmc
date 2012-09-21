@@ -1,5 +1,7 @@
 # ModuleCompiler
 
+[![Build Status](https://secure.travis-ci.org/daxingplay/ModuleCompiler.png)](http://travis-ci.org/daxingplay/ModuleCompiler)
+
 包括了一些常用的打包工具，java to nodejs
 
 ## 安装

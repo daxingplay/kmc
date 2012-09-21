@@ -25,6 +25,13 @@
         "iconv-lite":">=0.1.0",
         "colors":">=0.6.0-1"
     },
+    "devDependencies": {
+        "mocha": "~1.4.1",
+        "should": "~0.6.3"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/mocha"
+    },
     "licenses":[
         {
             "type":"MIT",
