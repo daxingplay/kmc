@@ -2,9 +2,20 @@
 
 [![Build Status](https://secure.travis-ci.org/daxingplay/ModuleCompiler.png)](http://travis-ci.org/daxingplay/ModuleCompiler)
 
-包括了一些常用的打包工具，java to nodejs
+## 简介
 
-## 安装
+Module Compiler是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+
+
+## 特点
+
+    - 基于NodeJS，相比于KISSY自带的Java工具，打包快速
+    - 参照浏览器端的KISSY的config进行配置，无需额外知识，只需要改一下包路径即能快速打包
+    - 支持混合编码打包，不同的包可以使用不同的编码
+    - 支持GBK输出
+
+## 使用
+
+### 安装
     npm install module-compiler
 
 or
@@ -12,9 +23,7 @@ or
     git clone git://github.com/daxingplay/ModuleCompiler.git
 
 
-### ModuleCompiler
-
-*Example:*
+### 编写你的打包脚本
 
     var ModuleCompiler = require('module-compiler');
 
@@ -22,56 +31,62 @@ or
     ModuleCompiler.config({
         packages: [{
             'name': 'sh',
-            'path': '这里建议写绝对路径',
+            'path': '这里建议写绝对路径，即sh这个包所在的目录',
             'charset': 'gbk'
         }]
     });
 
-    ModuleCompiler.build('xxx.js', 'xxx.combine.js');
+    // 将xxx.js打包为xxx.combine.js，输出编码为GBK
+    ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
 
-*API:*
+    // 用node执行你这个打包脚本就ok啦～
 
-    ModuleCompiler.config(cfg);
-    ModuleCompiler.analyze(inputPath);
-    ModuleCompiler.build(inputPath, outputPath, outputCharset);
 
-* cfg:{Object} 参数
-
-    * packages：{Array} KISSY的包。参见：http://docs.kissyui.com/1.2/docs/html/api/seed/loader/add.html#packages
-    * suffix：{String} 输出的文件名后缀，不带.js，比如打包后你想输出为xxx.combine.js，那么这里就配置为：.combine,
-    * map: {Array} 类似于KISSY的map方法，可以自己定义把模块名中的路径进行替换，比如把header/abc这个模块名替换为header/cdef，就应该这么配置：map: [['header/abc', 'header/cdef']]；map可以叠加
-    * charset: {String} 配置输出的编码
-
-* inputPath: {String} 需要打包的文件路径或者目录
-* outputPath: {String} 需要输出的文件路径
-* outputCharset: {String} 输出编码
-
-*Advanced Example:*
+### 高级使用指南
 
     var ModuleCompiler = require('module-compiler');
 
-    // 这里和KISSY.config一样，先配置包
     ModuleCompiler.config({
+        // 和KISSY一样，可以配置多个包
         packages: [{
             'name': 'app1',
-            'path': '这里写绝对路径',
-            // 这里是指app1这个包源码的编码
+            'path': 'app1这个包所在目录的绝对路径',
+            // 这里是指app1这个包中的文件的编码，同一个包内的编码请保持一致
             'charset': 'gbk'
         }, {
             'name': 'app2',
-            'path': 'app2的绝对路径',
+            'path': 'app2这个包所在目录的绝对路径',
             // 这里是指app2这个包源码的编码
             'charset': 'utf-8'
         }],
+        // 可以设置哪些包不打包进来。
+        exclude: ['base', 'event'],
+        // 输出的文件名后缀，不带.js，比如打包后你想输出为xxx.combine.js，那么这里就配置为：.combine
+        suffix: '',
+        // 类似于KISSY的map方法，可以自己定义把模块名中的路径进行替换
         map: [
             // 这样配置的话，那么，如果原先输出的app1的模块名中含有app1/2.0/字样的话，就会被替换成app1/19891014/
             ['app1/2.0/', 'app1/19891014/']
         ],
-        // 这里设置的是最后打包出来的文件的编码
+        // 这里设置的是最后打包出来的文件的编码，默认UTF-8，这里的设置相当于是全局设置，下面build中的设置是针对单一打包实例的
         charset: 'gbk'
     });
 
-    ModuleCompiler.build('xxx.js', 'xxx.combine.js');
+    /**
+     * 打包一个文件/目录
+     * @param inputPath {String} 源文件/目录的绝对路径.
+     * @param outputPath {String} 打包出来的文件/目录的路径.
+     * @param outputCharset {String} 输出编码，这里的设置会覆盖config.charset中的设置，默认UTF-8
+     * @return {Object} 打包出来的文件信息
+     */
+    ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
+
+### API汇总
+
+    * ModuleCompiler.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
+    * ModuleCompiler.analyze(inputPath)：只分析该文件依赖，不打包。
+    * ModuleCompiler.build(inputPath, outputPath, outputCharset)：打包函数，具体见上面的说明
+    * ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
 
 ## License
 遵守 "MIT"：https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md 协议
