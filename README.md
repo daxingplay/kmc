@@ -8,10 +8,10 @@ Module Compiler是一个基于NodeJS的KISSY模块打包工具，目前适用于
 
 ## 特点
 
-    - 基于NodeJS，相比于KISSY自带的Java工具，打包快速
-    - 参照浏览器端的KISSY的config进行配置，无需额外知识，只需要改一下包路径即能快速打包
-    - 支持混合编码打包，不同的包可以使用不同的编码
-    - 支持GBK输出
+- 基于NodeJS，相比于KISSY自带的Java工具，打包快速
+- 参照浏览器端的KISSY的config进行配置，无需额外知识，只需要改一下包路径即能快速打包
+- 支持混合编码打包，不同的包可以使用不同的编码
+- 支持GBK输出
 
 ## 使用
 
@@ -83,10 +83,10 @@ or
 
 ### API汇总
 
-    * ModuleCompiler.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
-    * ModuleCompiler.analyze(inputPath)：只分析该文件依赖，不打包。
-    * ModuleCompiler.build(inputPath, outputPath, outputCharset)：打包函数，具体见上面的说明
-    * ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
+* ModuleCompiler.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
+* ModuleCompiler.analyze(inputPath)：只分析该文件依赖，不打包。
+* ModuleCompiler.build(inputPath, outputPath, outputCharset)：打包函数，具体见上面的说明
+* ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
 
 ## License
 遵守 "MIT"：https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md 协议
