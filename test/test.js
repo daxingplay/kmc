@@ -1,5 +1,5 @@
 /**
- *
+ * mocha test.
  * @author: daxingplay<daxingplay@gmail.com>
  * @time: 12-9-20 10:26
  * @description:
@@ -12,7 +12,7 @@ var ModuleCompiler = require('../lib/index'),
     srcPath = path.resolve(casesPath, './src'),
     distPath = path.resolve(casesPath, './dist');
 
-describe('Analyze Test', function(){
+describe('Module Compiler Test', function(){
 
 //    beforeEach(function(){
 //        ModuleCompiler.clean();
