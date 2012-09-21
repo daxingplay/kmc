@@ -88,5 +88,9 @@ or
 * ModuleCompiler.build(inputPath, outputPath, outputCharset)：打包函数，具体见上面的说明
 * ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
 
+## CHANGELOG
+
+[版本更新记录](https://github.com/daxingplay/ModuleCompiler/blob/master/HISTORY.md)
+
 ## License
 遵守 "MIT"：https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md 协议
