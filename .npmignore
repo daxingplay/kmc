@@ -15,4 +15,3 @@ Thumbs.db
 *.swp
 out/
 node_modules/
-test/
