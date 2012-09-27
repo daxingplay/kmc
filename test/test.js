@@ -120,10 +120,33 @@ describe('Module Compiler Test', function(){
             ModuleCompiler.config(param);
             var result = ModuleCompiler.analyze(path.resolve(srcPath, './compile-with-kissy/init.js'));
 
-            result.should.have.property('submods').with.lengthOf(3);
+            result.should.have.property('submods').with.lengthOf(6);
             result.should.have.property('combined').with.lengthOf(4);
             result.combined.should.eql(['compile-with-kissy/mods/mod1', 'compile-with-kissy/mods/mod2', 'dom', 'compile-with-kissy/init']);
             result._moduleCache.should.be.a('object').and.have.property('dom');
         });
     });
+
+//    describe('test charset.', function(){
+//        var param = {
+//            packages: [{
+//                name: 'test-charset',
+//                path: srcPath,
+//                charset: 'gbk'
+//            }, {
+//                name: 'kissy',
+//                path: srcPath,
+//                charset: 'gbk'
+//            }]
+//        };
+//        it('kissy modules should not have kissy/ prefix.', function(){
+//            ModuleCompiler.config(param);
+//            var result = ModuleCompiler.analyze(path.resolve(srcPath, './compile-with-kissy/init.js'));
+//
+//            result.should.have.property('submods').with.lengthOf(3);
+//            result.should.have.property('combined').with.lengthOf(4);
+//            result.combined.should.eql(['compile-with-kissy/mods/mod1', 'compile-with-kissy/mods/mod2', 'dom', 'compile-with-kissy/init']);
+//            result._moduleCache.should.be.a('object').and.have.property('dom');
+//        });
+//    });
 });
