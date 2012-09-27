@@ -114,7 +114,9 @@ describe('Module Compiler Test', function(){
                 name: 'kissy',
                 path: srcPath,
                 charset: 'gbk'
-            }]
+            }],
+            debug: false,
+            silent: true
         };
         it('kissy modules should not have kissy/ prefix.', function(){
             ModuleCompiler.config(param);
