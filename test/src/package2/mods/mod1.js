@@ -1,6 +1,6 @@
 /**
  * mod1
- * @author: ×ÏÓ¢£¨daxingplay£©<daxingplay@gmail.com>
+ * @author: daxingplay<daxingplay@gmail.com>
  * @date: 12-9-27
  * @requires: kissy 1.2+
  */
@@ -11,7 +11,11 @@ KISSY.add(function (S) {
 
     return {
         init:function () {
-
+            S.log('mod1 from package2.');
         }
     }
+}, {
+    requires: [
+        './mod2'
+    ]
 });

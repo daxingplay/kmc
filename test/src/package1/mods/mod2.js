@@ -1,7 +1,7 @@
 /**
  * mod2
  * @author: daxingplay<daxingplay@gmail.com>
- * @date: 12-9-27
+ * @date: 12-9-26
  * @requires: kissy 1.2+
  */
 KISSY.add(function (S) {
@@ -11,7 +11,7 @@ KISSY.add(function (S) {
 
     return {
         init:function () {
-            S.log('mod2 from package2.')
+            S.log('Mod2Ò²ÊÇGBK±àÂë');
         }
     }
 });

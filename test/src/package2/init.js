@@ -1,6 +1,6 @@
 /**
- * init
- * @author: ×ÏÓ¢£¨daxingplay£©<daxingplay@gmail.com>
+ * init for package 2. This package is UTF-8 encoded.
+ * @author: daxingplay<daxingplay@gmail.com>
  * @date: 12-9-26
  * @requires: kissy 1.2+
  */
@@ -11,7 +11,12 @@ KISSY.add(function (S) {
 
     return {
         init:function () {
-
+            S.log('è¿™ä¸ªæ–‡ä»¶æ˜¯UTF-8ç¼–ç çš„ã€‚This file is UTF-8 encoded.');
         }
     }
+}, {
+    requires: [
+        './mods/mod1',
+        './mods/mod2'
+    ]
 });
