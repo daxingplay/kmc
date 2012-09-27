@@ -37,7 +37,7 @@ ModuleCompiler.config({
 });
 
 ModuleCompiler.build(path.resolve(sourcePath, app2 + '/init.js'), path.resolve(distPath, app2 + '/init.js'));
-
+ModuleCompiler.build(path.resolve(sourcePath, app2 + '/init.js'), path.resolve(distPath, app2 + '/init-utf-8.js'), 'utf-8');
 
 var app3 = 'circular-requires';
 ModuleCompiler.config({
