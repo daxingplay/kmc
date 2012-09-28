@@ -2,6 +2,7 @@
     should = require('should'),
     path = require('path'),
     fs = require('fs'),
+    iconv = require('iconv-lite'),
     fileUtil = require('../lib/fileUtil'),
     srcPath = path.resolve(__dirname, './src'),
     distPath = path.resolve(__dirname, './dist');
@@ -317,6 +318,64 @@ describe('When exclude', function(){
         submods[2].status.should.equal('ok');
         submods[3].name.should.equal('package2/mods/mod2');
         submods[3].status.should.equal('excluded');
+    });
+
+});
+
+describe('When specify a charset in config', function(){
+
+    var result1,
+        result2,
+        result3;
+
+    var inputFile = path.resolve(srcPath, 'package1/charset-gbk.js'),
+        outputFile1 = path.resolve(distPath, 'package1/charset-test-gbk-1.js'),
+        outputFile2 = path.resolve(distPath, 'package1/charset-test-gbk-2.js'),
+        outputFile3 = path.resolve(distPath, 'package1/charset-test-utf8-1.js');
+
+    function testCharset(file, charset){
+        var fileContent = fs.readFileSync(file);
+        fileContent = iconv.decode(fileContent, charset);
+        var match = fileContent.match(/模块/g);
+        return match;
+    }
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }, {
+                name: 'package2',
+                path: srcPath,
+                charset: 'utf-8'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result1 = ModuleCompiler.build(inputFile, outputFile1);
+        result2 = ModuleCompiler.build(inputFile, outputFile2, 'gbk');
+        result3 = ModuleCompiler.build(inputFile, outputFile3, 'utf-8');
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should be gbk in result1', function(){
+        var match = testCharset(outputFile1, 'gbk');
+        match.length.should.equal(2);
+    });
+
+    it('should be gbk in result2', function(){
+        var match = testCharset(outputFile2, 'gbk');
+        match.length.should.equal(2);
+    });
+
+    it('should be utf-8 in result3', function(){
+        var match = testCharset(outputFile3, 'utf-8');
+        match.length.should.equal(2);
     });
 
 });
