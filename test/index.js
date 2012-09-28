@@ -379,3 +379,45 @@ describe('When specify a charset in config', function(){
     });
 
 });
+
+describe('When two modules depend on each other', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/circular-requires.js'),
+        outputFile = path.resolve(distPath, 'package1/circular-requires.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have 4 sub modules', function(){
+        var submods = result.files[0].submods;
+        submods.length.should.equal(4);
+        submods[0].name.should.equal('package1/mods/mod3');
+        submods[0].status.should.equal('ok');
+        submods[1].name.should.equal('package1/mods/mod4');
+        submods[1].status.should.equal('ok');
+        submods[2].name.should.equal('package1/mods/mod5');
+        submods[2].status.should.equal('ok');
+        submods[3].name.should.equal('package1/circular-requires');
+        submods[3].status.should.equal('ok');
+    });
+
+    it('should have 4 combined modules', function(){
+        var combined = result.files[0].combined;
+        combined.length.should.equal(4);
+    });
+});
