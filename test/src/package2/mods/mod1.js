@@ -15,7 +15,7 @@ KISSY.add(function (S) {
         }
     }
 }, {
-    requires: [
+    "requires": [
         './mod2'
     ]
 });
