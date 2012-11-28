@@ -1,3 +1,10 @@
+## 2012.11.28, Version 0.0.4(Stable)
+
+### bug fix
+
+- ✔ 修正一处self未定义bug
+- ✔ 修正require正则分析少了一处引号的bug
+
 ## 2012.09.27, Version 0.0.3(Stable)
 
 ### bug fix
