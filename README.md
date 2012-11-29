@@ -59,8 +59,10 @@ or
             // 这里是指app2这个包源码的编码
             'charset': 'utf-8'
         }],
-        // 可以设置哪些包不打包进来。
+        // 可以设置哪些模块不打包进来。注意，这里exclude的是具体的模块名，支持正则
         exclude: ['base', 'event'],
+        // 如果是对一个目录下的所有文件进行打包，可以设置哪些文件不打包进来，支持正则。注意和上面的exclude的配置的区别。
+        ignoreFiles: ['.combo.js', '-min.js'],
         // 输出的文件名后缀，不带.js，比如打包后你想输出为xxx.combine.js，那么这里就配置为：.combine
         suffix: '',
         // 类似于KISSY的map方法，可以自己定义把模块名中的路径进行替换
