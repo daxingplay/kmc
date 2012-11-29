@@ -452,3 +452,56 @@ describe('When build a directory and have ignore config', function(){
         result.files.length.should.equal(0);
     });
 });
+
+describe('When build using module name', function(){
+    var result;
+
+    var outputFile = path.resolve(distPath, 'package1/one-package-simple.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build('package1/one-package-simple.js', outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have file generated.', function(){
+        var exists = false;
+        if(fs.existsSync(outputFile)){
+            exists = true;
+        }
+        exists.should.equal(true);
+    });
+
+    it('should build succesfull without any errors.', function(){
+        result.should.have.property('success', true);
+    });
+
+    it('should contain a file list.', function(){
+        result.should.have.property('files').with.lengthOf('1');
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.name.should.equal('package1/one-package-simple');
+        file.should.have.property('submods').with.lengthOf('2');
+    });
+
+    it('should have some modules in combo file', function(){
+        var submods = result.files[0].submods;
+        submods[0].name.should.equal('package1/mods/mod1');
+        submods[0].status.should.equal('ok');
+        submods[1].name.should.equal('package1/mods/mod2');
+        submods[1].status.should.equal('ok');
+    });
+});
