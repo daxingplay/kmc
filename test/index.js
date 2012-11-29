@@ -70,6 +70,7 @@ describe('When config', function(){
                 charset: 'gbk'
             }],
             exclude: ['mod2'],
+            ignoreFiles: ['.*combo.js'],
             silent: true,
             charset: 'utf-8'
         };
@@ -81,6 +82,7 @@ describe('When config', function(){
     });
     it('should have exclude, silent and charset', function(){
         config.should.have.property('exclude').with.lengthOf(1);
+        config.should.have.property('ignoreFiles').with.lengthOf(1);
         config.should.have.property('silent', true);
         config.should.have.property('charset', 'utf-8');
     });
@@ -419,5 +421,34 @@ describe('When two modules depend on each other', function(){
     it('should have 4 combined modules', function(){
         var combined = result.files[0].combined;
         combined.length.should.equal(4);
+    });
+});
+
+describe('When build a directory and have ignore config', function(){
+    var result;
+
+    var inputDir = path.resolve(srcPath, 'package1/'),
+        outputDir = path.resolve(distPath, 'package1-dir/');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            ignoreFiles: '.js',
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputDir, outputDir);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have no files', function(){
+        result.files.length.should.equal(0);
     });
 });

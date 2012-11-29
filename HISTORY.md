@@ -1,5 +1,11 @@
 ## 2012.11.28, Version 0.0.4(Stable)
 
+### enhancement
+
+- ✔ 增加ignoreFiles配置，方便打包目录的时候排除一些文件
+
+## 2012.11.28, Version 0.0.4(Stable)
+
 ### bug fix
 
 - ✔ 修正一处self未定义bug
