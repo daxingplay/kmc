@@ -1,4 +1,10 @@
-## 2012.11.28, Version 0.0.4(Stable)
+## 2012.11.28, Version 0.0.6(Stable)
+
+### enhancement
+
+- ✔ build的时候可以直接使用入口模块名进行打包
+
+## 2012.11.28, Version 0.0.5(Stable)
 
 ### enhancement
 
