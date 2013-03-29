@@ -14,6 +14,17 @@ var fs = require('fs'),
     utils = require('./lib/utils'),
     parseConfig = require('./lib/parse-config');
 
+function joinCombo(mods){
+    var result = [];
+    if(!_.isArray(mods)){
+        mods = [mods];
+    }
+    _.forEach(mods, function(mod){
+        !_.isEmpty(mod) && result.push("'" + mod + "': { requires: ['" + mod.join("', '") + "']}");
+    });
+    return result.length ? "KISSY.config('modules', {\n " + result.join(", \n") + " \n});" : "";
+}
+
 module.exports = {
     _config: {},
     config: function(cfg){
@@ -36,7 +47,7 @@ module.exports = {
         console.log(c.modules);
         return c.analyze(inputFile);
     },
-    build: function(inputFilePath, outputFilePath, outputCharset, autoComboFile){
+    build: function(inputFilePath, outputFilePath, outputCharset, depFile){
         var self = this,
             c,
             config,
@@ -59,7 +70,7 @@ module.exports = {
                             c = new Compiler(config);
                             var re = c.build(inputFile, outputFile, outputCharset);
                             re.modules = c.modules;
-                            autoComboFile && combo.push(c.combo());
+                            depFile && combo.push(re.autoCombo);
                             result.files.push(re);
                         }
                     }
@@ -68,7 +79,7 @@ module.exports = {
                 c = new Compiler(config);
                 var re = c.build(target, outputFilePath, outputCharset);
                 re.modules = c.modules;
-                autoComboFile && combo.push(c.combo());
+                depFile && combo.push(re.autoCombo);
                 result.files.push(re);
             }
         }else{
@@ -77,15 +88,15 @@ module.exports = {
             if(modulePath){
                 c = new Compiler(config);
                 var re = c.build(modulePath, outputFilePath, outputCharset);
-                autoComboFile && combo.push(c.combo());
+                depFile && combo.push(re.autoCombo);
                 result.files.push(re.dependencies);
             }else{
                 result.success = false;
                 !config.silent && console.info('[err]'.bold.red + ' cannot find target: %s', target);
             }
         }
-        if(autoComboFile){
-            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), autoComboFile), combo.join("\n\n"), outputCharset);
+        if(depFile){
+            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), joinCombo(combo), outputCharset);
         }
         return result;
     },

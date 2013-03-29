@@ -254,8 +254,8 @@ describe('When build with kissy', function(){
         var submods = result.files[0].modules;
         submods.should.have.property('dom');
         submods.should.have.property('event');
-        submods.dom.pkg.should.equal('kissy');
-        submods.event.pkg.should.equal('kissy');
+        submods['dom'].pkg.should.equal('kissy');
+        submods['event'].pkg.should.equal('kissy');
     });
 
 });
