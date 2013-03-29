@@ -11,6 +11,7 @@ var fs = require('fs'),
     _ = require('lodash'),
     iconv = require('iconv-lite'),
     Compiler = require('./lib/compiler'),
+    utils = require('./lib/utils'),
     parseConfig = require('./lib/parse-config');
 
 module.exports = {
@@ -84,18 +85,23 @@ module.exports = {
             }
         }
         if(autoComboFile){
-            var fd = fs.openSync(path.resolve(path.dirname(outputFilePath), autoComboFile), 'w');
-            var comboBuffer = iconv.encode(combo.join("\n\n"), outputCharset);
-            fs.writeSync(fd, comboBuffer, 0, comboBuffer.length);
-            fs.closeSync(fd);
+            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), autoComboFile), combo.join("\n\n"), outputCharset);
         }
         return result;
     },
-    combo: function(inputFile, depFileName){
+    combo: function(inputFile, depFileName, depFileCharset){
         var self = this,
-            result = self.analyze(inputFile),
-            content;
-
+            content,
+            config;
+        self._config = parseConfig.check(self._config, inputFile);
+        config = _.cloneDeep(self._config);
+        var c = new Compiler(config);
+        c.analyze(inputFile);
+        content = c.combo();
+        if(content && depFileName){
+            utils.writeFileSync(depFileName, content, depFileCharset);
+        }
+        return content;
     },
     clean: function(){
         this._config = {

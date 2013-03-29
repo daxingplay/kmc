@@ -24,9 +24,9 @@ before(function(){
     removeDistDir();
 });
 
-after(function(){
-    removeDistDir();
-});
+//after(function(){
+//    removeDistDir();
+//});
 
 afterEach(function(){
     ModuleCompiler.clean();
@@ -204,8 +204,6 @@ describe('When build with two package', function(){
 
 });
 
-// TODO
-return;
 describe('When build with kissy', function(){
 
     var result;
@@ -248,7 +246,7 @@ describe('When build with kissy', function(){
         var file = result.files[0];
         file.name.should.equal('package1/build-with-kissy');
         file.should.have.property('requires').with.lengthOf('3');
-        file.should.have.property('dependencies').with.lengthOf('1');
+        file.should.have.property('dependencies').with.lengthOf('3');
         file.modules.should.have.property('package1/build-with-kissy');
     });
 
@@ -415,6 +413,74 @@ describe('When two modules depend on each other', function(){
         var combined = result.files[0].combined;
         combined.length.should.equal(4);
     });
+});
+
+describe('When build and combo, ', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/build-with-kissy.js'),
+        outputFile = path.resolve(distPath, 'package1/build-with-kissy.js'),
+        depFile = path.resolve(distPath, 'package1/dep.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile, 'gbk', 'dep.js');
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have dep file called dep.js', function(){
+        var isExists = fs.existsSync(depFile);
+        isExists.should.equal(true);
+    });
+
+    it('should have proper config.', function(){
+        var depContent = iconv.decode(fs.readFileSync(depFile), 'gbk');
+        depContent.should.equal("KISSY.config('modules', {\n 'package1/build-with-kissy': {requires: ['dom', 'event']} \n});");
+    });
+
+});
+
+describe('When only combo without build, ', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/one-package-simple.js'),
+        depFile = path.resolve(distPath, 'package1/one-package-simple-dep.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.combo(inputFile, depFile, 'gbk');
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should not have dep', function(){
+        var isExists = fs.existsSync(depFile);
+        isExists.should.be.false;
+    });
+
 });
 
 //describe('When build a directory and have ignore config', function(){
