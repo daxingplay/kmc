@@ -447,7 +447,7 @@ describe('When build and combo, ', function(){
 
     it('should have proper config.', function(){
         var depContent = iconv.decode(fs.readFileSync(depFile), 'gbk');
-        depContent.should.equal("KISSY.config('modules', {\n 'package1/build-with-kissy': {requires: ['dom', 'event']} \n});");
+        depContent.should.equal("KISSY.config('modules', {\n 'package1/build-with-kissy': { requires: ['dom', 'event']} \n});");
     });
 
 });
@@ -476,9 +476,9 @@ describe('When only combo without build, ', function(){
         ModuleCompiler.clean();
     });
 
-    it('should not have dep', function(){
+    it('should have dep', function(){
         var isExists = fs.existsSync(depFile);
-        isExists.should.be.false;
+        isExists.should.be.true;
     });
 
 });

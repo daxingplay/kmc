@@ -20,7 +20,9 @@ function joinCombo(mods){
         mods = [mods];
     }
     _.forEach(mods, function(mod){
-        !_.isEmpty(mod) && result.push("'" + mod + "': { requires: ['" + mod.join("', '") + "']}");
+        _.forEach(mod, function(subMods, modName){
+            !_.isEmpty(subMods) && result.push("'" + modName + "': { requires: ['" + subMods.join("', '") + "']}");
+        });
     });
     return result.length ? "KISSY.config('modules', {\n " + result.join(", \n") + " \n});" : "";
 }
