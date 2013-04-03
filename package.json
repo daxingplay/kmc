@@ -1,7 +1,7 @@
 {
-    "name":"module-compiler",
+    "name":"kmc",
     "version":"1.0.0",
-    "description":"KISSY module compiler",
+    "description":"KISSY Module Compiler",
     "author":"daxingplay <daxingplay@gmail.com>",
     "homepage":"",
     "keywords":[
