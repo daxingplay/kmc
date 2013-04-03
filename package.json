@@ -1,7 +1,7 @@
 {
     "name":"module-compiler",
-    "version":"0.0.7",
-    "description":"kissy module compiler",
+    "version":"1.0.0",
+    "description":"KISSY Module Compiler",
     "author":"daxingplay <daxingplay@gmail.com>",
     "homepage":"",
     "keywords":[
@@ -20,10 +20,12 @@
     "directories":{
         "lib":"./lib/"
     },
-    "main":"./lib/index.js",
+    "main":"./index.js",
     "dependencies":{
         "iconv-lite":">=0.1.0",
-        "colors":">=0.6.0-1"
+        "colors":">=0.6.0-1",
+        "lodash": "",
+        "uglify-js": ""
     },
     "devDependencies": {
         "mocha": "~1.4.1",
