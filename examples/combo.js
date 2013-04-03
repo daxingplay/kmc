@@ -8,8 +8,9 @@
 var kmc = require('../index'),
     fs = require('fs'),
     path = require('path'),
+    utils = require('../lib/utils'),
     srcPath = path.resolve(__dirname, '../test/src/'),
-    distPath = path.resolve(__dirname, '../test/dist');
+    distPath = path.resolve(__dirname, './dist');
 
 var result;
 
@@ -26,6 +27,7 @@ kmc.config({
 result = kmc.analyze(path.resolve(srcPath, 'package1/build-with-kissy.js'));
 console.log(result);
 
+// build and generate dep file for KISSY 1.3 auto combo.
 var file1 = path.resolve(srcPath, 'package1/build-with-kissy.js'),
     file1output = path.resolve(distPath, 'package1/build-with-kissy.js');
 kmc.config({
@@ -38,34 +40,28 @@ kmc.config({
     charset: 'gbk'
 });
 result = kmc.build(file1, file1output, 'gbk', 'dep.js');
+console.log(result);
 
-//kmc.config({
-//    packages: [{
-//        name: 'package2',
-//        path: srcPath,
-//        charset: 'utf-8'
-//    }],
-//    silent: true,
-//    charset: 'gbk'
-//});
-//kmc.analyze(testFile);
-//
-//kmc.clean();
-//
-//kmc.config({
-//    packages: [{
-//        name: 'package1',
-//        path: srcPath,
-//        charset: 'gbk'
-//    }, {
-//        name: 'package2',
-//        path: srcPath,
-//        charset: 'utf-8'
-//    }],
-//    silent: true,
-//    charset: 'gbk'
-//});
-//result = kmc.analyze(path.resolve(srcPath, 'package1/two-package-simple.js'));
-//kmc.build(path.resolve(srcPath, 'package1/two-package-simple.js'), path.resolve(distPath, 'test.js'), 'gbk', 'dep.js');
+// build with two packages and generate dep file.
+kmc.config({
+    packages: [{
+        name: 'package1',
+        path: srcPath,
+        charset: 'gbk'
+    }, {
+        name: 'package2',
+        path: srcPath,
+        charset: 'utf-8'
+    }],
+    silent: true,
+    charset: 'gbk'
+});
+result = kmc.analyze(path.resolve(srcPath, 'package1/two-package-simple.js'));
+kmc.build(path.resolve(srcPath, 'package1/two-package-simple.js'), path.resolve(distPath, 'test.js'), 'gbk', 'dep.js');
 
 console.log(result);
+
+// clean output.
+if(fs.existsSync(distPath)){
+    utils.rmdirsSync(distPath);
+}

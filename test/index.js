@@ -24,9 +24,9 @@ before(function(){
     removeDistDir();
 });
 
-//after(function(){
-//    removeDistDir();
-//});
+after(function(){
+    removeDistDir();
+});
 
 afterEach(function(){
     ModuleCompiler.clean();
