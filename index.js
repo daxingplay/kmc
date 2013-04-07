@@ -27,6 +27,20 @@ function joinCombo(mods){
     return result.length ? "KISSY.config('modules', {\n " + result.join(", \n") + " \n});" : "";
 }
 
+function getModulePath(moduleName, config){
+    for(var i = 0; i < config.packages.length; i++){
+        var pkg = config.packages[i],
+            mod = moduleName.match(new RegExp(pkg.name + '\/(.*)'));
+        if(mod && mod[1]){
+            var modulePath = path.resolve(pkg.path, pkg.name, mod[1].replace(/\.js/, '') + '.js');
+            if(fs.existsSync(modulePath)){
+                return modulePath;
+            }
+        }
+    }
+    return false;
+}
+
 module.exports = {
     _config: {},
     config: function(cfg){
@@ -51,55 +65,79 @@ module.exports = {
     },
     build: function(inputFilePath, outputFilePath, outputCharset, depFile){
         var self = this,
-            c,
-            config,
-            target = path.resolve(inputFilePath),
+            targets = [],
             result = {
                 'success': true,
                 'files': []
             },
             combo = [];
-        self._config = parseConfig.check(self._config, inputFilePath);
-        config = _.cloneDeep(self._config);
-        if(fs.existsSync(target)){
-            if(fs.statSync(target).isDirectory()) {
-                var targets = fs.readdirSync(target);
-                for (var i in targets) {
-                    if(!self._isFileIgnored(targets[i])){
-                        var inputFile = path.resolve(target, targets[i]),
-                            outputFile = path.join(outputFilePath, targets[i]);
-                        if(path.extname(inputFile)==='.js') {
-                            c = new Compiler(config);
-                            var re = c.build(inputFile, outputFile, outputCharset);
-                            re.modules = c.modules;
-                            depFile && combo.push(re.autoCombo);
-                            result.files.push(re);
+
+        if(_.isString(inputFilePath)){
+            var target = path.resolve(inputFilePath);
+            if(fs.existsSync(target)){
+                if(fs.statSync(target).isDirectory()){
+                    var files = fs.readdirSync(target);
+                    _.forEach(files, function(file){
+                        var inputFile = path.resolve(target, file),
+                            outputFile = path.resolve(outputFilePath, file);
+                        if(path.extname(inputFile) === '.js'){
+                            targets.push({
+                                src: inputFile,
+                                dest: outputFile
+                            });
                         }
-                    }
+                    });
+                }else{
+                    targets.push({
+                        src: inputFilePath,
+                        dest: outputFilePath
+                    });
                 }
-            } else {
-                c = new Compiler(config);
-                var re = c.build(target, outputFilePath, outputCharset);
-                re.modules = c.modules;
-                depFile && combo.push(re.autoCombo);
-                result.files.push(re);
-            }
-        }else{
-            // MC.build('pkgName/abc');
-            var modulePath = self.getModulePath(inputFilePath);
-            if(modulePath){
-                c = new Compiler(config);
-                var re = c.build(modulePath, outputFilePath, outputCharset);
-                depFile && combo.push(re.autoCombo);
-                result.files.push(re.dependencies);
             }else{
-                result.success = false;
-                !config.silent && console.info('[err]'.bold.red + ' cannot find target: %s', target);
+                // MC.build('pkgName/abc');
+                // in this case, package must be configured.
+                var modulePath = getModulePath(inputFilePath, self._config);
+                if(modulePath){
+                    targets.push({
+                        src: modulePath,
+                        dest: outputFilePath
+                    });
+                }
             }
+        }else if(_.isPlainObject(inputFilePath)){
+            _.forEach(inputFilePath, function(file){
+                if(fs.src){
+                    targets.push({
+                        src: file.src,
+                        dest: file.dest ? file.dest : path.dirname(file.src)
+                    });
+                }
+            });
+        }else if(_.isArray(inputFilePath)){
+            var destIsArray = _.isArray(outputFilePath) ? outputFilePath : false;
+            _.forEach(inputFilePath, function(file, index){
+                targets.push({
+                    src: file,
+                    dest: destIsArray ? outputFilePath[index] : outputFilePath
+                });
+            });
         }
+
+        _.forEach(targets, function(file, index){
+            self._config = parseConfig.check(self._config, file.src);
+            var config = _.cloneDeep(self._config);
+            var kmc = new Compiler(config);
+            var re = kmc.build(file.src, file.dest, outputCharset);
+            re.modules = kmc.modules;
+            depFile && combo.push(re.autoCombo);
+            result.files.push(re);
+        });
+        result.success = result.files.length === 0 ? false : true;
+
         if(depFile){
             utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), joinCombo(combo), outputCharset);
         }
+
         return result;
     },
     combo: function(inputFile, depFileName, depFileCharset){

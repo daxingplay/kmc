@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 1.0.0 test file.
  * @author: 橘子<daxingplay@gmail.com>
  * @time: 13-3-13 10:46
@@ -151,6 +151,74 @@ describe('When build with only one package', function(){
 
 });
 
+describe('When build with a list of files', function(){
+
+    var result;
+
+    var inputFiles = [
+            path.resolve(srcPath, 'package1/one-package-simple.js'),
+            path.resolve(srcPath, 'package1/charset-gbk.js')
+        ],
+        outputFiles = [
+            path.resolve(distPath, 'package1/one-package-simple.js'),
+            path.resolve(distPath, 'package1/charset-gbk.js')
+        ];
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFiles, outputFiles);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have file generated.', function(){
+        result.should.have.property('success', true);
+        result.should.have.property('files').with.lengthOf('2');
+    });
+
+});
+
+describe('When build with module name', function(){
+
+    var result;
+
+    var inputFile = 'package1/one-package-simple.js',
+        outputFile = path.resolve(distPath, 'package1/one-package-simple.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have file generated.', function(){
+        result.should.have.property('success', true);
+        result.should.have.property('files').with.lengthOf('1');
+    });
+
+});
+
 describe('When build with two package', function(){
 
     var result;
@@ -244,7 +312,7 @@ describe('When build with kissy', function(){
 
     it('should have proper main module.', function(){
         var file = result.files[0];
-        file.name.should.equal('package1/build-with-kissy');
+        file.should.have.property('name', 'package1/build-with-kissy');
         file.should.have.property('requires').with.lengthOf('3');
         file.should.have.property('dependencies').with.lengthOf('3');
         file.modules.should.have.property('package1/build-with-kissy');
