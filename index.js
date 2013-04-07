@@ -71,7 +71,6 @@ module.exports = {
                 'files': []
             },
             combo = [];
-
         if(_.isString(inputFilePath)){
             var target = path.resolve(inputFilePath);
             if(fs.existsSync(target)){
@@ -118,7 +117,7 @@ module.exports = {
             _.forEach(inputFilePath, function(file, index){
                 targets.push({
                     src: file,
-                    dest: destIsArray ? outputFilePath[index] : outputFilePath
+                    dest: destIsArray && outputFilePath[index] ? outputFilePath[index] : outputFilePath
                 });
             });
         }
@@ -132,7 +131,7 @@ module.exports = {
             depFile && combo.push(re.autoCombo);
             result.files.push(re);
         });
-        result.success = result.files.length === 0 ? false : true;
+        result.success = result.files.length !== 0;
 
         if(depFile){
             utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), joinCombo(combo), outputCharset);
