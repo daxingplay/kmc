@@ -23,12 +23,13 @@ Module Compiler是一个基于NodeJS的KISSY模块打包工具，目前适用于
 ## 使用
 
 ### 安装
-    npm install module-compiler
+    npm install kmc
 
 or
 
     git clone git://github.com/daxingplay/ModuleCompiler.git
 
+**注意**: 新版本的KISSY Module Compiler的npm包已经更名为kmc，如果使用老版本（此版已经不再维护），请`npm install module-compiler`
 
 ### 编写你的打包脚本
 
