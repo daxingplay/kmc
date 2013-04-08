@@ -9,6 +9,7 @@ var ModuleCompiler = require('../index'),
     should = require('should'),
     path = require('path'),
     fs = require('fs'),
+    os = require('os'),
     iconv = require('iconv-lite'),
     utils = require('../lib/utils'),
     srcPath = path.resolve(__dirname, './src'),
@@ -515,7 +516,7 @@ describe('When build and combo, ', function(){
 
     it('should have proper config.', function(){
         var depContent = iconv.decode(fs.readFileSync(depFile), 'gbk');
-        depContent.should.equal("KISSY.config('modules', {\n 'package1/build-with-kissy': { requires: ['dom', 'event']} \n});");
+        depContent.should.equal("KISSY.config('modules', {" + os.EOL + " 'package1/build-with-kissy': { requires: ['dom', 'event']} " + os.EOL + "});");
     });
 
 });

@@ -14,19 +14,6 @@ var fs = require('fs'),
     utils = require('./lib/utils'),
     parseConfig = require('./lib/parse-config');
 
-function joinCombo(mods){
-    var result = [];
-    if(!_.isArray(mods)){
-        mods = [mods];
-    }
-    _.forEach(mods, function(mod){
-        _.forEach(mod, function(subMods, modName){
-            !_.isEmpty(subMods) && result.push("'" + modName + "': { requires: ['" + subMods.join("', '") + "']}");
-        });
-    });
-    return result.length ? "KISSY.config('modules', {\n " + result.join(", \n") + " \n});" : "";
-}
-
 function getModulePath(moduleName, config){
     for(var i = 0; i < config.packages.length; i++){
         var pkg = config.packages[i],
@@ -134,7 +121,7 @@ module.exports = {
         result.success = result.files.length !== 0;
 
         if(depFile){
-            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), joinCombo(combo), outputCharset);
+            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), utils.joinCombo(combo), outputCharset);
         }
 
         return result;
