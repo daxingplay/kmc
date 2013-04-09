@@ -2,6 +2,8 @@
 
 [![Build Status](https://secure.travis-ci.org/daxingplay/ModuleCompiler.png)](http://travis-ci.org/daxingplay/ModuleCompiler)
 
+[![NPM version](https://badge.fury.io/js/kmc.png)](http://badge.fury.io/js/kmc)
+
 ## 简介
 
 Module Compiler是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+
