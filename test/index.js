@@ -552,6 +552,45 @@ describe('When only combo without build, ', function(){
 
 });
 
+describe('When using map, ', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/one-package-simple.js'),
+        outputFile = path.resolve(distPath, 'package1/one-package-simple-map.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            map: [
+                ['package1/', 'app/pkg/']
+            ],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile, 'gbk');
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should build without error.', function(){
+        var isExists = fs.existsSync(outputFile);
+        isExists.should.be.true;
+    });
+
+    it('should have app prefix in module name.', function(){
+        var main = result.files[0];
+        main.should.have.property('name', 'app/pkg/one-package-simple');
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
