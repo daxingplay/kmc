@@ -98,13 +98,14 @@ ModuleCompiler.config({
 ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
 ```
 
-更详细的文档，请参见[wiki](/wiki)。
+更详细的文档，请参见[wiki](https://github.com/daxingplay/ModuleCompiler/wiki)。
 
 ### API汇总
 
 * ModuleCompiler.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
 * ModuleCompiler.analyze(inputPath)：只分析该文件依赖，不打包。
-* ModuleCompiler.build(inputPath, outputPath, outputCharset)：打包函数，具体见上面的说明
+* ModuleCompiler.build(inputPath, outputPath, outputCharset, depFilePath)：打包函数，具体见wiki
+* ModuleCompiler.combo(inputPath, depFilePath, depFileCharset): 不打包，只生成KISSY 1.3的自动combo依赖文件
 * ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
 
 ## CHANGELOG
