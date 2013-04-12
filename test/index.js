@@ -330,65 +330,56 @@ describe('When build with kissy', function(){
 });
 
 
-//describe('When exclude', function(){
-//
-//    var result;
-//
-//    var inputFile = path.resolve(srcPath, 'package1/two-package-simple.js'),
-//        outputFile = path.resolve(distPath, 'package1/two-package-with-exclude.js');
-//
-//    before(function(){
-//        ModuleCompiler.config({
-//            packages: [{
-//                name: 'package1',
-//                path: srcPath,
-//                charset: 'gbk'
-//            }, {
-//                name: 'package2',
-//                path: srcPath,
-//                charset: 'utf-8'
-//            }],
-//            exclude: ['mod2'],
-//            silent: true,
-//            charset: 'gbk'
-//        });
-//        result = ModuleCompiler.build(inputFile, outputFile);
-//    });
-//
-//    after(function(){
-//        ModuleCompiler.clean();
-//    });
-//
-//    it('should have file generated.', function(){
-//        var exists = false;
-//        if(fs.existsSync(outputFile)){
-//            exists = true;
-//        }
-//        exists.should.equal(true);
-//        result.should.have.property('success', true);
-//        result.should.have.property('files').with.lengthOf('1');
-//    });
-//
-//    it('should have proper main module.', function(){
-//        var file = result.files[0];
-//        file.name.should.equal('package1/two-package-simple');
-//        file.should.have.property('submods').with.lengthOf('4');
-//        file.should.have.property('combined').with.lengthOf('3');
-//    });
-//
-//    it('should have some excluded modules in submods', function(){
-//        var submods = result.files[0].submods;
-//        submods[0].name.should.equal('package1/mods/mod1');
-//        submods[0].status.should.equal('ok');
-//        submods[1].name.should.equal('package1/mods/mod2');
-//        submods[1].status.should.equal('excluded');
-//        submods[2].name.should.equal('package2/mods/mod1');
-//        submods[2].status.should.equal('ok');
-//        submods[3].name.should.equal('package2/mods/mod2');
-//        submods[3].status.should.equal('excluded');
-//    });
-//
-//});
+describe('When exclude', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/two-package-simple.js'),
+        outputFile = path.resolve(distPath, 'package1/two-package-with-exclude.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }, {
+                name: 'package2',
+                path: srcPath,
+                charset: 'utf-8'
+            }],
+            exclude: ['mod2'],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have file generated.', function(){
+        var exists = false;
+        if(fs.existsSync(outputFile)){
+            exists = true;
+        }
+        exists.should.equal(true);
+        result.should.have.property('success', true);
+        result.should.have.property('files').with.lengthOf('1');
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.should.have.property('name', 'package1/two-package-simple');
+    });
+
+    it('should have some excluded modules in submods', function(){
+        var file = result.files[0];
+        file.modules['package2/mods/mod2'].should.have.property('status', 'excluded');
+    });
+
+});
 
 describe('When specify a charset in config', function(){
 
