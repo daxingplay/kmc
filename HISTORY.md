@@ -1,3 +1,15 @@
+## 2013.04.12, Version 1.0.3(Stable)
+
+### enhancement
+
+- ✔ 增加map功能支持，添加相应测试用例
+
+## 2013.04.10, Version 1.0.2(Stable)
+
+### enhancement
+
+- ✔ 完全重构，增加对KISSY 1.3的自动Combo支持
+
 ## 2012.11.28, Version 0.0.6(Stable)
 
 ### enhancement
