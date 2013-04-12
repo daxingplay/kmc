@@ -556,8 +556,8 @@ describe('When using map, ', function(){
 
     var result;
 
-    var inputFile = path.resolve(srcPath, 'package1/one-package-simple.js'),
-        outputFile = path.resolve(distPath, 'package1/one-package-simple-map.js');
+    var inputFile = path.resolve(srcPath, 'package1/map.js'),
+        outputFile = path.resolve(distPath, 'package1/map.js');
 
     before(function(){
         ModuleCompiler.config({
@@ -569,10 +569,9 @@ describe('When using map, ', function(){
             map: [
                 ['package1/', 'app/pkg/']
             ],
-            silent: true,
-            charset: 'gbk'
+            silent: true
         });
-        result = ModuleCompiler.build(inputFile, outputFile, 'gbk');
+        result = ModuleCompiler.build(inputFile, outputFile, 'utf-8');
     });
 
     after(function(){
@@ -586,7 +585,14 @@ describe('When using map, ', function(){
 
     it('should have app prefix in module name.', function(){
         var main = result.files[0];
-        main.should.have.property('name', 'app/pkg/one-package-simple');
+        main.should.have.property('name', 'app/pkg/map');
+    });
+
+    it('should replace content as well.', function(){
+        var content = fs.readFileSync(outputFile).toString();
+        // only match those in content, not in comments.
+        var matches = content.match(/['"]app\/pkg\//g);
+        matches.length.should.equal(7);
     });
 
 });

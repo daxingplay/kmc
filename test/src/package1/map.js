@@ -16,6 +16,8 @@ KISSY.add(function (S) {
     }
 }, {
     requires: [
-        'package1/mods/mod1'
+        'package1/mods/mod1',
+        "package1/mods/mod2",
+        './mods/mod3'
     ]
 });
