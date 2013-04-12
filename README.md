@@ -6,21 +6,23 @@
 
 ## 简介
 
-Module Compiler是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+
+KISSY Module Compiler（kmc）是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+的代码打包
 
 ## 特点
 
+- 支持GruntJS，参见[grunt-kmc](https://github.com/daxingplay/grunt-kmc).
 - 基于NodeJS，相比于KISSY自带的Java工具，打包快速
 - 参照浏览器端的KISSY的config进行配置，无需额外知识，只需要改一下包路径即能快速打包
 - 支持混合编码打包，不同的包可以使用不同的编码
 - 支持GBK输出
 - 支持KISSY 1.3的自动combo功能，可以生成依赖关系文件
 - 提供底层依赖分析接口，方便集成到其他工具当中
+- 支持map功能，可以使用正则自由替换输出的模块名
 
 ## 版本说明
 
 - 0.0.7版本适用于KISSY 1.2、1.3的打包，目前已经在淘宝多个业务广泛使用，单纯打包没有任何问题，但是不具备依赖分析生成功能，此版本已经不再维护，推荐使用新版本。
-- 1.0.0版本开始支持KISSY 1.3的自动combo功能
+- 1.0.0版本开始支持KISSY 1.3的自动combo功能，推荐使用
 
 ## 使用
 
@@ -35,6 +37,7 @@ or
 
 ### 编写你的打包脚本
 
+```js
     var ModuleCompiler = require('module-compiler');
 
     // 这里和KISSY.config一样，先配置包
@@ -50,10 +53,11 @@ or
     ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
 
     // 用node执行你这个打包脚本就ok啦～
-
+```
 
 ### 高级使用指南
 
+```js
     var ModuleCompiler = require('module-compiler');
 
     ModuleCompiler.config({
@@ -92,6 +96,8 @@ or
      * @return {Object} 打包出来的文件信息
      */
     ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
+```
+
 
 ### API汇总
 
