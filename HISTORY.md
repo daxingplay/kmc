@@ -1,3 +1,9 @@
+## 2013.04.12, Version 1.0.4(Stable)
+
+### enhancement
+
+- ✔ 增加exclude、ignoreFiles功能支持，添加相应测试用例
+
 ## 2013.04.12, Version 1.0.3(Stable)
 
 ### enhancement
