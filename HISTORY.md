@@ -1,3 +1,9 @@
+## 2013.04.12, Version 1.0.5(Stable)
+
+### bugfix
+
+- ✔ 修正部分相对路径解析出错的bug
+
 ## 2013.04.12, Version 1.0.4(Stable)
 
 ### enhancement

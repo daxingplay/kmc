@@ -75,7 +75,7 @@ module.exports = {
                     });
                 }else{
                     targets.push({
-                        src: inputFilePath,
+                        src: target,
                         dest: outputFilePath
                     });
                 }
