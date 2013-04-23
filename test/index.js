@@ -588,6 +588,38 @@ describe('When using map, ', function(){
 
 });
 
+describe('When require with dir', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/require-dir.js'),
+        outputFile = path.resolve(distPath, 'package1/require-dir.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'utf-8'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have `package1/mods/index` module', function(){
+        var submods = result.files[0].dependencies;
+        submods.length.should.equal(1);
+        submods[0].should.have.property('name', 'package1/mods/index');
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //

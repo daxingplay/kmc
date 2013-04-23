@@ -1,3 +1,10 @@
+## 2013.04.23, Version 1.0.6(Stable)
+
+### bugfix
+
+- ✔ 修正require路径为目录导致解析出错的bug
+- ✔ 默认关闭任何console的log信息，silent默认为true
+
 ## 2013.04.12, Version 1.0.5(Stable)
 
 ### bugfix
