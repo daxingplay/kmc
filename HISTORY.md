@@ -1,3 +1,9 @@
+## 2013.04.23, Version 1.0.7(Stable)
+
+### bugfix
+
+- ✔ 修正输出路径为目录导致无法正确输出的bug
+
 ## 2013.04.23, Version 1.0.6(Stable)
 
 ### bugfix
