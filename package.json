@@ -1,0 +1,47 @@
+{
+    "name":"kmc",
+    "version":"1.0.6",
+    "description":"KISSY Module Compiler",
+    "author":"daxingplay <daxingplay@gmail.com>",
+    "homepage":"",
+    "keywords":[
+        "kissy",
+        "build",
+        "module",
+        "compiler"
+    ],
+    "bugs":{
+        "url":"https://github.com/daxingplay/ModuleCompiler/issues"
+    },
+    "contributors":[],
+    "engines":{
+        "node":">=0.8.0"
+    },
+    "directories":{
+        "lib":"./lib/"
+    },
+    "main":"./index.js",
+    "dependencies":{
+        "iconv-lite":">=0.1.0",
+        "colors":">=0.6.0-1",
+        "lodash": "",
+        "uglify-js": ""
+    },
+    "devDependencies": {
+        "mocha": "~1.4.1",
+        "should": "~0.6.3"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "licenses":[
+        {
+            "type":"MIT",
+            "url":"https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md"
+        }
+    ],
+    "repository":{
+        "type":"git",
+        "url":"git://github.com/daxingplay/ModuleCompiler.git"
+    }
+}
