@@ -1,3 +1,10 @@
+## 2013.05.10, Version 1.0.8(Stable)
+
+### bugfix
+
+- ✔ 修正combo打包时未指定charset的bug
+- ✔ 修正combo打包时目录不存在的bug
+
 ## 2013.04.23, Version 1.0.7(Stable)
 
 ### bugfix
