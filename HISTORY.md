@@ -1,3 +1,9 @@
+## 2013.05.30, Version 1.0.9(Stable)
+
+### bugfix
+
+- ✔ 修正require `mod/mod1`这种相对路径无法打包的问题
+
 ## 2013.05.10, Version 1.0.8(Stable)
 
 ### bugfix
