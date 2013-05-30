@@ -38,10 +38,10 @@ or
 ### 编写你的打包脚本
 
 ```js
-var ModuleCompiler = require('module-compiler');
+var kmc = require('kmc');
 
 // 这里和KISSY.config一样，先配置包
-ModuleCompiler.config({
+kmc.config({
     packages: [{
         'name': 'sh',
         'path': '这里建议写绝对路径，即sh这个包所在的目录',
@@ -50,7 +50,7 @@ ModuleCompiler.config({
 });
 
 // 将xxx.js打包为xxx.combine.js，输出编码为GBK
-ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
+kmc.build('xxx.js', 'xxx.combine.js', 'gbk');
 
 // 用node执行你这个打包脚本就ok啦～
 ```
@@ -58,9 +58,9 @@ ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
 ### 高级使用指南
 
 ```js
-var ModuleCompiler = require('module-compiler');
+var kmc = require('kmc');
 
-ModuleCompiler.config({
+kmc.config({
     // 和KISSY一样，可以配置多个包
     packages: [{
         'name': 'app1',
@@ -95,18 +95,18 @@ ModuleCompiler.config({
  * @param outputCharset {String} 输出编码，这里的设置会覆盖config.charset中的设置，默认UTF-8
  * @return {Object} 打包出来的文件信息
  */
-ModuleCompiler.build('xxx.js', 'xxx.combine.js', 'gbk');
+kmc.build('xxx.js', 'xxx.combine.js', 'gbk');
 ```
 
 更详细的文档，请参见[wiki](https://github.com/daxingplay/ModuleCompiler/wiki)。
 
 ### API汇总
 
-* ModuleCompiler.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
-* ModuleCompiler.analyze(inputPath)：只分析该文件依赖，不打包。
-* ModuleCompiler.build(inputPath, outputPath, outputCharset, depFilePath)：打包函数，具体见wiki
-* ModuleCompiler.combo(inputPath, depFilePath, depFileCharset): 不打包，只生成KISSY 1.3的自动combo依赖文件
-* ModuleCompiler.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
+* kmc.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
+* kmc.analyze(inputPath)：只分析该文件依赖，不打包。
+* kmc.build(inputPath, outputPath, outputCharset, depFilePath)：打包函数，具体见wiki
+* kmc.combo(inputPath, depFilePath, depFileCharset): 不打包，只生成KISSY 1.3的自动combo依赖文件
+* kmc.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
 
 ## CHANGELOG
 
