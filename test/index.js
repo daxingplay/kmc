@@ -652,6 +652,38 @@ describe('When require with relative path', function(){
 
 });
 
+describe('When build with kissy gallery', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/build-with-gallery.js'),
+        outputFile = path.resolve(distPath, 'package1/build-with-gallery.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'utf-8'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have `gallery/calendar/1.1/index` module', function(){
+        var submods = result.files[0].dependencies;
+        submods.length.should.equal(1);
+        submods[0].should.have.property('name', 'gallery/calendar/1.1/index');
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //

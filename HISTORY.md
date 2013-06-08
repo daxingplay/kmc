@@ -1,3 +1,9 @@
+## 2013.06.08, Version 1.0.10(Stable)
+
+### bugfix
+
+- ✔ 修正require gallery模块无法被combo的问题
+
 ## 2013.05.30, Version 1.0.9(Stable)
 
 ### bugfix
