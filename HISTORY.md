@@ -1,3 +1,9 @@
+## 2013.06.08, Version 1.0.11(Stable)
+
+### bugfix
+
+- ✔ 修正部分代码写法，combo的时候无法加模块名的bug
+
 ## 2013.06.08, Version 1.0.10(Stable)
 
 ### bugfix
