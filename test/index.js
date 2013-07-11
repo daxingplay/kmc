@@ -684,6 +684,37 @@ describe('When build with kissy gallery', function(){
 
 });
 
+describe('When build with files which have BOM', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/build-with-bom-file.js'),
+        outputFile = path.resolve(distPath, 'package1/build-with-bom-file.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'utf-8'
+            }],
+            silent: true,
+            charset: 'utf-8'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should not have BOM header any more', function(){
+        var fileContent = fs.readFileSync(outputFile);
+        /^\uFEFF/.test(fileContent).should.equal(false);
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
