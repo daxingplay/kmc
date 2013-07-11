@@ -1,3 +1,9 @@
+## 2013.07.11, Version 1.0.12(Stable)
+
+### bugfix
+
+- ✔ issue 23:打包的时候去除文件BOM头
+
 ## 2013.06.08, Version 1.0.11(Stable)
 
 ### bugfix
