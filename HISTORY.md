@@ -1,3 +1,9 @@
+## 2013.07.11, Version 1.0.13(Stable)
+
+### bugfix
+
+- ✔ issue 23:解决部分情况下去除BOM头导致编码乱掉的问题
+
 ## 2013.07.11, Version 1.0.12(Stable)
 
 ### bugfix
