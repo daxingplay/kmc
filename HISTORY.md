@@ -1,5 +1,11 @@
 ## 2013.07.11, Version 1.0.13(Stable)
 
+### enhancement
+
+- 增加了对KISSY 1.3+ ignorePkgNameInUri的支持，感谢翰文(@shepherdwind)的pull request
+
+## 2013.07.11, Version 1.0.13(Stable)
+
 ### bugfix
 
 - ✔ issue 23:解决部分情况下去除BOM头导致编码乱掉的问题
