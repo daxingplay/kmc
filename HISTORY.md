@@ -1,4 +1,4 @@
-## 2013.07.11, Version 1.0.13(Stable)
+## 2013.08.16, Version 1.0.14(Stable)
 
 ### enhancement
 
