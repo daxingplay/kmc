@@ -715,6 +715,49 @@ describe('When build with files which have BOM', function(){
 
 });
 
+describe('Support ignorePackageNameInUri for package config', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'a/aa.js'),
+        outputFile = path.resolve(distPath, 'a/a-build.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'page',
+                path: srcPath,
+                charset: 'utf-8',
+                ignorePackageNameInUri: true
+            }],
+            silent: true,
+            charset: 'utf-8'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('file should not have package name in file path', function(){
+      var mod1 = result.files[0];
+      var filePath = mod1.path;
+      var depFile = mod1.dependencies[0].path;
+      /page/.test(depFile).should.equal(false);
+      /page/.test(filePath).should.equal(false);
+      /page/.test(outputFile).should.equal(false);
+    });
+
+    it('module name should have package name', function(){
+      var mod = result.files[0];
+      var depModName = mod.dependencies[0].name;
+      /page/.test(mod.name).should.equal(true);
+      /page/.test(depModName).should.equal(true);
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
