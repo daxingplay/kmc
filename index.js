@@ -50,7 +50,7 @@ module.exports = {
         console.log(c.modules);
         return c.analyze(inputFile);
     },
-    build: function(inputFilePath, outputFilePath, outputCharset, depFile){
+    build: function(inputFilePath, outputFilePath, outputCharset, depFile, traverse){
         var self = this,
             targets = [],
             result = {
@@ -62,10 +62,10 @@ module.exports = {
             var target = path.resolve(inputFilePath);
             if(fs.existsSync(target)){
                 if(fs.statSync(target).isDirectory()){
-                    var files = fs.readdirSync(target);
-                    _.forEach(files, function(file){
+//                    var files = fs.readdirSync(target);
+                    _.forEach(utils.traverseDirSync(target, traverse), function(file){
                         var inputFile = path.resolve(target, file),
-                            outputFile = path.resolve(outputFilePath, file);
+                            outputFile = path.resolve(outputFilePath, path.relative(target, file));
                         if(path.extname(inputFile) === '.js'){
                             targets.push({
                                 src: inputFile,

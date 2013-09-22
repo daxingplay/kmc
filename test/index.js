@@ -758,6 +758,45 @@ describe('Support ignorePackageNameInUri for package config', function(){
 
 });
 
+describe('When build all files in a dir recursively', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package3/'),
+        outputFile = path.resolve(distPath, 'package3/');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package3',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile, undefined, undefined, true);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should build succesfull without any errors.', function(){
+        result.should.have.property('success', true);
+    });
+
+    it('should contain a file list.', function(){
+        result.should.have.property('files').with.lengthOf('3');
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.name.should.equal('package3/index');
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
