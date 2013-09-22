@@ -790,11 +790,6 @@ describe('When build all files in a dir recursively', function(){
         result.should.have.property('files').with.lengthOf('3');
     });
 
-    it('should have proper main module.', function(){
-        var file = result.files[0];
-        file.name.should.equal('package3/index');
-    });
-
 });
 
 //describe('When build a directory and have ignore config', function(){
