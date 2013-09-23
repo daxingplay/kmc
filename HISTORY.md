@@ -1,3 +1,9 @@
+## 2013.09.23, Version 1.0.15(Stable)
+
+### enhancement
+
+- build增加参数traverse，可以对build的第一个参数指定的目录，递归打包，@issue 29
+
 ## 2013.08.16, Version 1.0.14(Stable)
 
 ### enhancement
