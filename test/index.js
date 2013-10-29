@@ -529,7 +529,7 @@ describe('When only combo without build, ', function(){
             silent: true,
             charset: 'gbk'
         });
-        result = ModuleCompiler.combo(inputFile, depFile, 'gbk');
+        result = ModuleCompiler.combo(inputFile, depFile, 'gbk', false);
     });
 
     after(function(){
