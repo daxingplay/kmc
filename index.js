@@ -132,7 +132,7 @@ module.exports = {
             config;
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
-        fixModuleName = fixModuleName !== false;
+        fixModuleName = fixModuleName === true;
         var c = new Compiler(config);
         c.analyze(inputFile);
         content = c.combo(fixModuleName);

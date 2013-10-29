@@ -2,7 +2,7 @@
 
 ### bugfix
 
-- combo增加参数fixModuleName，默认为true，@issue 31
+- combo增加参数fixModuleName，默认为false，@issue 31
 
 ## 2013.09.23, Version 1.0.15(Stable)
 
