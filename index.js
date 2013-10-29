@@ -1,6 +1,6 @@
 /**
- *
- * @author: 橘子<daxingplay@gmail.com>
+ * KISSY Module Compiler
+ * @author: daxingplay<daxingplay@gmail.com>
  * @time: 13-3-12 11:41
  * @description:
  */
@@ -126,15 +126,16 @@ module.exports = {
 
         return result;
     },
-    combo: function(inputFile, depFileName, depFileCharset){
+    combo: function(inputFile, depFileName, depFileCharset, fixModuleName){
         var self = this,
             content,
             config;
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
+        fixModuleName = fixModuleName !== false;
         var c = new Compiler(config);
         c.analyze(inputFile);
-        content = c.combo();
+        content = c.combo(fixModuleName);
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }

@@ -15,6 +15,6 @@ Thumbs.db
 *.swp
 out/
 node_modules/
-.log
+*.log
 projectFilesBackup/
 test/dist/
