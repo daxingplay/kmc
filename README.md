@@ -8,6 +8,8 @@
 
 KISSY Module Compiler（kmc）是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+的代码打包
 
+如果您有任何问题，请邮件或者来往（daxingplay）上联系我。
+
 ## 特点
 
 - 支持GruntJS，参见[grunt-kmc](https://github.com/daxingplay/grunt-kmc).
