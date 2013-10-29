@@ -1,3 +1,9 @@
+## 2013.10.29, Version 1.0.16(Stable)
+
+### bugfix
+
+- combo增加参数fixModuleName，默认为true，@issue 31
+
 ## 2013.09.23, Version 1.0.15(Stable)
 
 ### enhancement
