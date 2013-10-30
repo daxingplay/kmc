@@ -126,7 +126,7 @@ module.exports = {
 
         return result;
     },
-    combo: function(inputFile, depFileName, depFileCharset, fixModuleName){
+    combo: function(inputFile, depFileName, depFileCharset, fixModuleName, returnDependencies){
         var self = this,
             content,
             config;
@@ -134,12 +134,12 @@ module.exports = {
         config = _.cloneDeep(self._config);
         fixModuleName = fixModuleName === true;
         var c = new Compiler(config);
-        c.analyze(inputFile);
+        var result = c.analyze(inputFile);
         content = c.combo(fixModuleName);
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }
-        return content;
+        return returnDependencies === true ? { files: [result], success: true, modules: c.modules } : content;
     },
     clean: function(){
         this._config = {
