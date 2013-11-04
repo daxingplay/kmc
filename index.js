@@ -47,7 +47,6 @@ module.exports = {
         self._config = parseConfig.check(self._config, inputFile);
         // start to analyze.
         var c = new Compiler(self._config);
-        console.log(c.modules);
         return c.analyze(inputFile);
     },
     build: function(inputFilePath, outputFilePath, outputCharset, depFile, traverse){
