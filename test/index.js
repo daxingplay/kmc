@@ -792,6 +792,39 @@ describe('When build all files in a dir recursively', function(){
 
 });
 
+describe('When parsing process has an error', function(){
+
+    var result;
+    var hasError = false;
+
+    var inputFile = path.resolve(srcPath, 'package1/error.js'),
+        outputFile = path.resolve(distPath, 'package1/error.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath
+            }],
+            silent: true
+        });
+        try{
+            result = ModuleCompiler.build(inputFile, outputFile);
+        }catch(e){
+            hasError = true;
+        }
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should throw error.', function(){
+        hasError.should.equal(true);
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
