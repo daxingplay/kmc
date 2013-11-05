@@ -1,3 +1,9 @@
+## 2013.11.05, Version 1.0.18(Stable)
+
+### enhancement
+
+- issue #24 #25: js文件解析出错时抛出异常
+
 ## 2013.10.29, Version 1.0.16(Stable)
 
 ### bugfix
