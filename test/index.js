@@ -825,6 +825,40 @@ describe('When parsing process has an error', function(){
 
 });
 
+describe('When modules have css files', function(){
+
+    var result;
+    var hasError = false;
+
+    var inputFile = path.resolve(srcPath, 'package1/require-css.js'),
+        outputFile = path.resolve(distPath, 'package1/require-css.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath
+            }],
+            silent: true
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should resolve css files.', function(){
+        var mod = result.files[0];
+        var dep = mod.dependencies[0];
+        var depModName = dep.name;
+        /package1/.test(mod.name).should.equal(true);
+        /package1/.test(depModName).should.equal(true);
+        dep.type.should.equal('css');
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
