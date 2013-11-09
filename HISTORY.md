@@ -1,3 +1,9 @@
+## 2013.11.09, Version 1.0.19(Stable)
+
+### enhancement
+
+- issue #32: 解析css文件的具体信息
+
 ## 2013.11.05, Version 1.0.18(Stable)
 
 ### enhancement
