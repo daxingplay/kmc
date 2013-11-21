@@ -1,3 +1,9 @@
+## 2013.11.21, Version 1.0.20(Stable)
+
+### enhancement
+
+- 添加对KISSY 1.3+ 新包配置（对象配置）格式的支持
+
 ## 2013.11.09, Version 1.0.19(Stable)
 
 ### enhancement
