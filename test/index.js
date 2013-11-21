@@ -864,9 +864,6 @@ describe('When use KISSY 1.3+ package format', function(){
 
     var config;
 
-    var inputFile = path.resolve(srcPath, 'package1/one-package-simple.js'),
-        outputFile = path.resolve(distPath, 'package1/one-package-simple.js');
-
     before(function(){
         config = ModuleCompiler.config({
             packages: {
