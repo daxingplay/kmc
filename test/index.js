@@ -859,6 +859,48 @@ describe('When modules have css files', function(){
 
 });
 
+describe('When alias was configured', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/alias.js'),
+        outputFile = path.resolve(distPath, 'package1/aliasjs');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath
+            }],
+            modules: {
+                'package1/mods/mod1': {
+                    alias: 'package1/mods/mod2'
+                }
+            },
+            silent: true
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should use the name of mod1.', function(){
+        var mod = result.files[0];
+        var dep = mod.dependencies[0];
+        var depModName = dep.name;
+        depModName.should.equal('package1/mods/mod1');
+        dep.type.should.equal('css');
+    });
+
+    it('should have mod2 contents.', function(){
+        var outputContent = fs.readFileSync(outputFile);
+        /mod2/.test(outputContent).should.equal(true);
+    });
+
+});
+
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
