@@ -14,6 +14,6 @@ KISSY.add(function (S) {
     }
 }, {
     requires: [
-        './mods/mod1'
+        './mods/mod2'
     ]
 });

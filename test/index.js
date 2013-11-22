@@ -873,8 +873,8 @@ describe('When alias was configured', function(){
                 path: srcPath
             }],
             modules: {
-                'package1/mods/mod1': {
-                    alias: 'package1/mods/mod2'
+                'package1/mods/mod2': {
+                    alias: 'package1/mods/mod3'
                 }
             },
             silent: true
@@ -886,21 +886,21 @@ describe('When alias was configured', function(){
         ModuleCompiler.clean();
     });
 
-    it('should use the name of mod1.', function(){
+    it('should use the name of mod3.', function(){
         var mod = result.files[0];
         var dep = mod.dependencies[0];
         var depModName = dep.name;
-        depModName.should.equal('package1/mods/mod1');
+        depModName.should.equal('package1/mods/mod3');
     });
 
-    it('should contain mod2 contents.', function(){
+    it('should contain mod3 contents.', function(){
         var outputContent = fs.readFileSync(outputFile);
-        /mod2/.test(outputContent).should.equal(true);
+        /\[mod3/.test(outputContent).should.equal(true);
     });
 
-    it('should not contain mod1 contents', function(){
+    it('should not contain mod2 contents', function(){
         var outputContent = fs.readFileSync(outputFile);
-        /\[mod1/.test(outputContent).should.equal(false);
+        /\[mod2/.test(outputContent).should.equal(false);
     });
 
 });
