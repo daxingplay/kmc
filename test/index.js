@@ -864,7 +864,7 @@ describe('When alias was configured', function(){
     var result;
 
     var inputFile = path.resolve(srcPath, 'package1/alias.js'),
-        outputFile = path.resolve(distPath, 'package1/aliasjs');
+        outputFile = path.resolve(distPath, 'package1/alias.js');
 
     before(function(){
         ModuleCompiler.config({
@@ -891,12 +891,16 @@ describe('When alias was configured', function(){
         var dep = mod.dependencies[0];
         var depModName = dep.name;
         depModName.should.equal('package1/mods/mod1');
-        dep.type.should.equal('css');
     });
 
-    it('should have mod2 contents.', function(){
+    it('should contain mod2 contents.', function(){
         var outputContent = fs.readFileSync(outputFile);
         /mod2/.test(outputContent).should.equal(true);
+    });
+
+    it('should not contain mod1 contents', function(){
+        var outputContent = fs.readFileSync(outputFile);
+        /\[mod1/.test(outputContent).should.equal(false);
     });
 
 });
