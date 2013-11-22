@@ -859,7 +859,6 @@ describe('When modules have css files', function(){
 
 });
 
-
 describe('When use KISSY 1.3+ package format', function(){
 
     var config;
@@ -885,6 +884,50 @@ describe('When use KISSY 1.3+ package format', function(){
 
 });
 
+describe('When alias was configured', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/alias.js'),
+        outputFile = path.resolve(distPath, 'package1/alias.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath
+            }],
+            modules: {
+                'package1/mods/mod2': {
+                    alias: 'package1/mods/mod3'
+                }
+            },
+            silent: true
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should use the name of mod3.', function(){
+        var mod = result.files[0];
+        var dep = mod.dependencies[0];
+        var depModName = dep.name;
+        depModName.should.equal('package1/mods/mod3');
+    });
+
+    it('should contain mod3 contents.', function(){
+        var outputContent = fs.readFileSync(outputFile);
+        /\[mod3/.test(outputContent).should.equal(true);
+    });
+
+    it('should not contain mod2 contents', function(){
+        var outputContent = fs.readFileSync(outputFile);
+        /\[mod2/.test(outputContent).should.equal(false);
+    });
+});
 //describe('When build a directory and have ignore config', function(){
 //    var result;
 //
