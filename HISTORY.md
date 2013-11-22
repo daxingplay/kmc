@@ -3,7 +3,7 @@
 ### enhancement
 
 - 添加对KISSY 1.3+ 新包配置（对象配置）格式的支持
-- issue #33: 增加alias配置支持
+- issue #34: 增加alias配置支持
 
 ## 2013.11.09, Version 1.0.19(Stable)
 
