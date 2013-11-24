@@ -940,11 +940,8 @@ describe('When fix module name', function(){
         ModuleCompiler.config({
             packages: [{
                 name: 'package1',
-                path: srcPath
-            }, {
-                name: 'package2',
-                path: path.resolve(srcPath, './package2'),
-                ignorePackageNameInUri: true
+                path: srcPath,
+                charset: 'gbk'
             }],
             silent: true
         });
@@ -961,87 +958,43 @@ describe('When fix module name', function(){
 
     it('should have new module files', function(){
         fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
-        fs.existsSync(path.resolve(outputDir, './package1/mods/mod1.js')).should.equal(true);
+        fs.existsSync(path.resolve(outputDir, './package1/mods/mod2.js')).should.equal(true);
     });
 });
-//describe('When build a directory and have ignore config', function(){
-//    var result;
-//
-//    var inputDir = path.resolve(srcPath, 'package1/'),
-//        outputDir = path.resolve(distPath, 'package1-dir/');
-//
-//    before(function(){
-//        ModuleCompiler.config({
-//            packages: [{
-//                name: 'package1',
-//                path: srcPath,
-//                charset: 'gbk'
-//            }],
-//            silent: true,
-//            ignoreFiles: '.js',
-//            charset: 'gbk'
-//        });
-//        result = ModuleCompiler.build(inputDir, outputDir);
-//    });
-//
-//    after(function(){
-//        ModuleCompiler.clean();
-//    });
-//
-//    it('should have no files', function(){
-//        result.files.length.should.equal(0);
-//    });
-//});
 
-//describe('When build using module name', function(){
+//describe('When fix module name', function(){
 //    var result;
 //
-//    var outputFile = path.resolve(distPath, 'package1/one-package-simple.js');
+//    var inputFile = path.resolve(srcPath, 'package1/fix-module-name.js'),
+//        depFile = path.resolve(distPath, 'package1/fix-module-name-dep.js'),
+//        outputDir = path.resolve(distPath, './fix-module-name');
 //
 //    before(function(){
 //        ModuleCompiler.config({
 //            packages: [{
 //                name: 'package1',
-//                path: srcPath,
-//                charset: 'gbk'
+//                path: srcPath
+//            }, {
+//                name: 'pkg2',
+//                path: path.resolve(srcPath, './package2'),
+//                ignorePackageNameInUri: true
 //            }],
-//            silent: true,
-//            charset: 'gbk'
+//            silent: true
 //        });
-//        result = ModuleCompiler.build('package1/one-package-simple.js', outputFile);
+//        result = ModuleCompiler.combo(inputFile, depFile, '', true, true, outputDir);
 //    });
 //
 //    after(function(){
 //        ModuleCompiler.clean();
 //    });
 //
-//    it('should have file generated.', function(){
-//        var exists = false;
-//        if(fs.existsSync(outputFile)){
-//            exists = true;
-//        }
-//        exists.should.equal(true);
+//    it('should have dep file', function(){
+//        fs.existsSync(depFile).should.equal(true);
 //    });
 //
-//    it('should build succesfull without any errors.', function(){
-//        result.should.have.property('success', true);
-//    });
-//
-//    it('should contain a file list.', function(){
-//        result.should.have.property('files').with.lengthOf('1');
-//    });
-//
-//    it('should have proper main module.', function(){
-//        var file = result.files[0];
-//        file.name.should.equal('package1/one-package-simple');
-//        file.should.have.property('submods').with.lengthOf('2');
-//    });
-//
-//    it('should have some modules in combo file', function(){
-//        var submods = result.files[0].submods;
-//        submods[0].name.should.equal('package1/mods/mod1');
-//        submods[0].status.should.equal('ok');
-//        submods[1].name.should.equal('package1/mods/mod2');
-//        submods[1].status.should.equal('ok');
+//    it('should have new module files', function(){
+//        fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
+//        fs.existsSync(path.resolve(outputDir, './package1/mods/mod2.js')).should.equal(true);
+//        fs.existsSync(path.resolve(outputDir, './mods/mod2.js')).should.equal(true);
 //    });
 //});

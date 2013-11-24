@@ -15,7 +15,6 @@ KISSY.add('package1/fix-module-name',function (S, Node) {
 }, {
     requires: [
         'node',
-        './mods/mod2',
-        'package2/'
+        './mods/mod2'
     ]
 });
