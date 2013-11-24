@@ -125,7 +125,7 @@ module.exports = {
 
         return result;
     },
-    combo: function(inputFile, depFileName, depFileCharset, fixModuleName, returnDependencies){
+    combo: function(inputFile, depFileName, depFileCharset, fixModuleName, returnDependencies, outputDir){
         var self = this,
             content,
             config;
@@ -134,7 +134,7 @@ module.exports = {
         fixModuleName = fixModuleName === true;
         var c = new Compiler(config);
         var result = c.analyze(inputFile);
-        content = c.combo(fixModuleName);
+        content = c.combo(fixModuleName, outputDir);
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }
