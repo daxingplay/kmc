@@ -26,7 +26,7 @@ before(function(){
 });
 
 after(function(){
-//    removeDistDir();
+    removeDistDir();
 });
 
 afterEach(function(){
