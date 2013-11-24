@@ -1,3 +1,9 @@
+## 2013.11.24, Version 1.0.21(Stable)
+
+### enhancement
+
+- combo增加输出文件的选项，方便fix module name
+
 ## 2013.11.22, Version 1.0.20(Stable)
 
 ### enhancement
