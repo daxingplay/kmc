@@ -57,6 +57,14 @@ module.exports = {
                 'files': []
             },
             combo = [];
+        // for object arguments.
+        if(_.isPlainObject(inputFilePath) && inputFilePath.src){
+            outputFilePath = inputFilePath.dest;
+            outputCharset = inputFilePath.outputCharset;
+            depFile = inputFilePath.depPath;
+            traverse = inputFilePath.traverse;
+        }
+
         if(_.isString(inputFilePath)){
             var target = path.resolve(inputFilePath);
             if(fs.existsSync(target)){
@@ -129,6 +137,14 @@ module.exports = {
         var self = this,
             content,
             config;
+        if(_.isObject(inputFile)){
+            depFileName = inputFile.depPath;
+            depFileCharset = inputFile.depCharset;
+            fixModuleName = inputFile.fixModuleName;
+            returnDependencies = inputFile.showFullResult;
+            outputDir = inputFile.dest;
+            inputFile = inputFile.src;
+        }
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
         fixModuleName = fixModuleName === true;
@@ -138,7 +154,7 @@ module.exports = {
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }
-        return returnDependencies === true ? { files: [result], success: true, modules: c.modules } : content;
+        return returnDependencies === true ? { files: [result], success: true, modules: c.modules, content: content } : content;
     },
     clean: function(){
         this._config = {

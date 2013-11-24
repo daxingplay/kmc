@@ -1008,3 +1008,77 @@ describe('When fix module name which package name is ignored', function(){
         /pkg1\/mods\/mod2/.test(fs.readFileSync(path.resolve(outputDir, './mods/mod2.js'))).should.equal(true);
     });
 });
+
+describe('When pass an object as arguments for build', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/one-package-simple.js'),
+        outputFile = path.resolve(distPath, 'package1/one-package-simple.js'),
+        depPath = path.resolve(distPath, 'dep/package1/one-package-simple.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build({
+            src: inputFile,
+            dest: outputFile,
+            depPath: depPath,
+            outputCharset: 'utf8'
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper file generated', function(){
+        fs.existsSync(outputFile).should.equal(true);
+        fs.existsSync(depPath).should.equal(true);
+    });
+});
+
+describe('When pass an object as arguments for combo', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/fix-module-name.js'),
+        depFile = path.resolve(distPath, 'package1/fix-module-name-dep.js'),
+        outputDir = path.resolve(distPath, './fix-module-name3');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.combo({
+            src: inputFile,
+            dest: outputDir,
+            depPath: depFile,
+            depCharset: 'utf8',
+            fixModuleName: true,
+            showFullResult: true
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper file generated', function(){
+        fs.existsSync(depFile).should.equal(true);
+        fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
+        fs.existsSync(path.resolve(outputDir, './package1/mods/mod2.js')).should.equal(true);
+    });
+
+});
