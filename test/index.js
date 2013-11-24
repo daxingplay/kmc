@@ -960,6 +960,11 @@ describe('When fix module name', function(){
         fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
         fs.existsSync(path.resolve(outputDir, './package1/mods/mod2.js')).should.equal(true);
     });
+
+    it('should have added module names to files', function(){
+        /package1\/fix\-module\-name/.test(fs.readFileSync(path.resolve(outputDir, './package1/fix-module-name.js'))).should.equal(true);
+        /package1\/mods\/mod2/.test(fs.readFileSync(path.resolve(outputDir, './package1/mods/mod2.js'))).should.equal(true);
+    });
 });
 
 describe('When fix module name which package name is ignored', function(){
@@ -992,5 +997,14 @@ describe('When fix module name which package name is ignored', function(){
     it('should have new module files', function(){
         fs.existsSync(path.resolve(outputDir, './fix-module-name2.js')).should.equal(true);
         fs.existsSync(path.resolve(outputDir, './mods/mod2.js')).should.equal(true);
+    });
+
+    it('should have proper module names', function(){
+        result.modules.should.have.property('pkg1/fix-module-name2');
+    });
+
+    it('should have added module names to files', function(){
+        /pkg1\/fix\-module\-name2/.test(fs.readFileSync(path.resolve(outputDir, './fix-module-name2.js'))).should.equal(true);
+        /pkg1\/mods\/mod2/.test(fs.readFileSync(path.resolve(outputDir, './mods/mod2.js'))).should.equal(true);
     });
 });
