@@ -1,5 +1,5 @@
 /**
- * mod2
+ * mod2, gbk encoded.
  * @author: daxingplay<daxingplay@gmail.com>
  * @date: 12-9-26
  * @requires: kissy 1.2+

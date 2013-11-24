@@ -26,7 +26,7 @@ before(function(){
 });
 
 after(function(){
-    removeDistDir();
+//    removeDistDir();
 });
 
 afterEach(function(){
@@ -926,6 +926,42 @@ describe('When alias was configured', function(){
     it('should not contain mod2 contents', function(){
         var outputContent = fs.readFileSync(outputFile);
         /\[mod2/.test(outputContent).should.equal(false);
+    });
+});
+
+describe('When fix module name', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/fix-module-name.js'),
+        depFile = path.resolve(distPath, 'package1/fix-module-name-dep.js'),
+        outputDir = path.resolve(distPath, './fix-module-name');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath
+            }, {
+                name: 'package2',
+                path: path.resolve(srcPath, './package2'),
+                ignorePackageNameInUri: true
+            }],
+            silent: true
+        });
+        result = ModuleCompiler.combo(inputFile, depFile, '', true, true, outputDir);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have dep file', function(){
+        fs.existsSync(depFile).should.equal(true);
+    });
+
+    it('should have new module files', function(){
+        fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
+        fs.existsSync(path.resolve(outputDir, './package1/mods/mod1.js')).should.equal(true);
     });
 });
 //describe('When build a directory and have ignore config', function(){
