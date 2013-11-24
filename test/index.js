@@ -979,7 +979,6 @@ describe('When fix module name which package name is ignored', function(){
             silent: true
         });
         result = ModuleCompiler.combo(inputFile, depFile, '', true, true, outputDir);
-        console.log(result.modules);
     });
 
     after(function(){
@@ -991,7 +990,7 @@ describe('When fix module name which package name is ignored', function(){
     });
 
     it('should have new module files', function(){
-        fs.existsSync(path.resolve(outputDir, './fix-module-name.js')).should.equal(true);
+        fs.existsSync(path.resolve(outputDir, './fix-module-name2.js')).should.equal(true);
         fs.existsSync(path.resolve(outputDir, './mods/mod2.js')).should.equal(true);
     });
 });
