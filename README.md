@@ -33,7 +33,7 @@ KISSY Module Compiler（kmc）是一个基于NodeJS的KISSY模块打包工具，
 
 or
 
-    git clone git://github.com/daxingplay/ModuleCompiler.git
+    git clone git://github.com/daxingplay/kmc.git
 
 **注意**: 新版本的KISSY Module Compiler的npm包已经更名为kmc，如果使用老版本（此版已经不再维护），请`npm install module-compiler`
 
@@ -92,27 +92,79 @@ kmc.config({
 
 /**
  * 打包一个文件/目录
- * @param inputPath {String} 源文件/目录的绝对路径.
- * @param outputPath {String} 打包出来的文件/目录的路径.
+ * @param src {String} 源文件/目录的绝对路径.
+ * @param dest {String} 打包出来的文件/目录的路径.
  * @param outputCharset {String} 输出编码，这里的设置会覆盖config.charset中的设置，默认UTF-8
  * @return {Object} 打包出来的文件信息
  */
-kmc.build('xxx.js', 'xxx.combine.js', 'gbk');
+kmc.build({
+    src: 'xxx.js',
+    dest: 'xxx.combine.js',
+    outputCharset: 'gbk'
+});
 ```
 
-更详细的文档，请参见[wiki](https://github.com/daxingplay/ModuleCompiler/wiki)。
+更详细的文档，请参见[wiki](https://github.com/daxingplay/kmc/wiki)。
 
 ### API汇总
 
-* kmc.config(cfg)：配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
-* kmc.analyze(inputPath)：只分析该文件依赖，不打包。
-* kmc.build(inputPath, outputPath, outputCharset, depFilePath, traverse)：打包函数，具体见wiki
-* kmc.combo(inputPath, depFilePath, depFileCharset, fixModuleName): 不打包，只生成KISSY 1.3的自动combo依赖文件，fixModuleName默认为false
-* kmc.clean(): 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
+#### 配置
+
+配置包，返回当前所有配置信息。如果不带参数，直接返回当前所有配置信息。
+
+```js
+kmc.config(cfg);
+```
+
+#### 分析依赖
+
+只分析该文件依赖，不打包。
+
+```js
+kmc.analyze(src);
+```
+
+#### 打包
+
+打包函数，具体见wiki
+
+```js
+kmc.build({
+	src: '\xxx\xxx\src\a.js', // 需要打包的文件
+	dest: '\xxx\xxx\build\a.js', // 打包后文件输出的路径
+	outputCharset: 'gbk', // 所有的输出文件编码，包括依赖文件
+	depPath: '\xxx\xxx\dep.js' // 依赖文件的路径
+});
+```
+
+
+#### 生成依赖
+
+不打包，只生成KISSY 1.3的自动combo依赖文件
+
+```js
+kmc.combo({
+	src: '', // 需要打包or生成依赖关系的文件
+	dest: '', // 模块最后输出的路径（fixModuleName === true的时候必须配置这个选项，否则源文件的内容会被修改）
+	depPath: '', // 依赖文件的输出路径
+	depCharset: '', // 依赖文件的编码
+	fixModuleName: '', // 是否给文件添加模块名，默认为true
+	showFullResult: '' // 函数的return结果会以对象的形式输出丰富的信息
+});
+```
+
+#### 清空配置
+
+可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
+
+```js
+kmc.clean();
+```
+
 
 ## CHANGELOG
 
-[版本更新记录](https://github.com/daxingplay/ModuleCompiler/blob/master/HISTORY.md)
+[版本更新记录](https://github.com/daxingplay/kmc/blob/master/HISTORY.md)
 
 ## License
-遵守 "MIT"：https://github.com/daxingplay/ModuleCompiler/blob/master/LICENSE.md 协议
+遵守 "MIT"：https://github.com/daxingplay/kmc/blob/master/LICENSE.md 协议
