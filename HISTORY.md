@@ -4,6 +4,7 @@
 
 - combo增加输出文件的选项，方便fix module name
 - combo、build方法支持使用对象形式传参
+- fixModuleName默认为true
 
 ## 2013.11.22, Version 1.0.20(Stable)
 
