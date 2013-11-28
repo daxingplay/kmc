@@ -63,6 +63,7 @@ module.exports = {
             outputCharset = inputFilePath.outputCharset;
             depFile = inputFilePath.depPath;
             traverse = inputFilePath.traverse;
+            inputFilePath = inputFilePath.src;
         }
 
         if(_.isString(inputFilePath)){
