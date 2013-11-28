@@ -1,3 +1,10 @@
+## 2013.11.28, Version 1.0.22(Stable)
+
+### bugfix
+
+- 修复对象传参数中的一个bug
+- fix issue #36
+
 ## 2013.11.24, Version 1.0.21(Stable)
 
 ### enhancement
