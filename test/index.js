@@ -1,5 +1,5 @@
 ﻿/**
- * 1.0.0 test file.
+ * kmc test file.
  * @author: 橘子<daxingplay@gmail.com>
  * @time: 13-3-13 10:46
  * @description:
@@ -1079,6 +1079,50 @@ describe('When pass an object as arguments for combo', function(){
         fs.existsSync(depFile).should.equal(true);
         fs.existsSync(path.resolve(outputDir, './package1/fix-module-name.js')).should.equal(true);
         fs.existsSync(path.resolve(outputDir, './package1/mods/mod2.js')).should.equal(true);
+    });
+
+});
+
+describe('When use require in add function', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/in-function-require.js'),
+        outputFile = path.resolve(distPath, 'package1/in-function-require.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: {
+                package1: {
+                    base: srcPath,
+                    charset: 'gbk'
+                }
+            },
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build({
+            src: inputFile,
+            dest: outputFile
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper file generated', function(){
+        fs.existsSync(outputFile).should.equal(true);
+    });
+
+    it('should have proper modules', function(){
+        var file = result.files[0];
+        file.name.should.equal('package1/in-function-require');
+        file.should.have.property('requires').with.lengthOf('2');
+    });
+
+    it('should have requires array in outputfile', function(){
+        var content = fs.readFileSync(outputFile);
+        /'package1\/in\-function\-require',\s*\['node', '.\/mods\/mod2'\]/.test(content).should.equal(true);
     });
 
 });
