@@ -1,3 +1,9 @@
+## 2013.12.1, Version 1.0.23(Stable)
+
+### enhancement
+
+- issue #35: 支持KISSY 1.4+的get requires from function
+
 ## 2013.11.28, Version 1.0.22(Stable)
 
 ### bugfix
