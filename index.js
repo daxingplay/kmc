@@ -149,7 +149,7 @@ module.exports = {
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
         fixModuleName = fixModuleName !== false;
-		var outputFile = path.resolve(outputDir,path.basename(inputFile));
+		var outputFile = outputDir ? path.resolve(outputDir,path.basename(inputFile)) : '';
         var c = new Compiler(config,outputFile);
         var result = c.analyze(inputFile);
         content = c.combo(fixModuleName, outputDir,comboOnly);
