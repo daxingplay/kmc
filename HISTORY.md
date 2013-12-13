@@ -1,3 +1,9 @@
+## 2013.12.1, Version 1.0.28(Stable)
+
+### bugfix
+
+- 修复ignorePackageNameInUri为true时获取模块路径错误的bug
+
 ## 2013.12.1, Version 1.0.23(Stable)
 
 ### enhancement
