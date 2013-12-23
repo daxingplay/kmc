@@ -1,3 +1,9 @@
+## 2013.12.23, Version 1.0.29(Stable)
+
+### bugfix
+
+- 修复build&combo模式下依赖错误的问题
+
 ## 2013.12.1, Version 1.0.28(Stable)
 
 ### bugfix
