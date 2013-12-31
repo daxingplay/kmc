@@ -1,3 +1,9 @@
+## 2013.12.31, Version 1.0.30(Stable)
+
+### enhancement
+
+- parse ast出错的时候增加文件路径
+
 ## 2013.12.23, Version 1.0.29(Stable)
 
 ### bugfix
