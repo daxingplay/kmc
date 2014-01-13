@@ -1,3 +1,9 @@
+## 2013.12.23, Version 1.0.31(Stable)
+
+### bugfix
+
+- 修复一种代码书写的方式造成的依赖分析问题，参考test/src/kissy/kissy-extend.js
+
 ## 2013.12.31, Version 1.0.30(Stable)
 
 ### enhancement
