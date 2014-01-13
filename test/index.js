@@ -1126,3 +1126,37 @@ describe('When use require in add function', function(){
     });
 
 });
+
+describe('When kissy was hacked', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/kissy-extend.js'),
+        outputFile = path.resolve(distPath, 'package1/kissy-extend.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: {
+                package1: {
+                    base: srcPath,
+                    charset: 'gbk'
+                }
+            },
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build({
+            src: inputFile,
+            dest: outputFile
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper modules', function(){
+        var file = result.files[0];
+        file.name.should.equal('package1/kissy-extend');
+        file.should.have.property('requires').with.lengthOf('2');
+    });
+});
