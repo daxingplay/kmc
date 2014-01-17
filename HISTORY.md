@@ -1,3 +1,9 @@
+## 2014.01.18, Version 1.0.33(Stable)
+
+### bugfix
+
+- 如果require用错了，暂时不抛出异常，配置了silent: false后可以看到console的输出
+
 ## 2013.12.23, Version 1.0.31(Stable)
 
 ### bugfix
