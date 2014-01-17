@@ -1127,6 +1127,50 @@ describe('When use require in add function', function(){
 
 });
 
+describe('When use require not properly in add function', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/in-function-require2.js'),
+        outputFile = path.resolve(distPath, 'package1/in-function-require2.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: {
+                package1: {
+                    base: srcPath,
+                    charset: 'gbk'
+                }
+            },
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build({
+            src: inputFile,
+            dest: outputFile
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper file generated', function(){
+        fs.existsSync(outputFile).should.equal(true);
+    });
+
+    it('should have proper modules', function(){
+        var file = result.files[0];
+        file.name.should.equal('package1/in-function-require2');
+        file.should.have.property('requires').with.lengthOf('1');
+    });
+
+    it('should have requires array in outputfile', function(){
+        var content = fs.readFileSync(outputFile);
+        /'package1\/in\-function\-require2',\s*\['node']/.test(content).should.equal(true);
+    });
+
+});
+
 describe('When kissy was hacked', function(){
     var result;
 
