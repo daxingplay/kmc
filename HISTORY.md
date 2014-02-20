@@ -1,3 +1,9 @@
+## 2014.02.20, Version 1.0.34(Stable)
+
+### bugfix
+
+- 如果模块没有找到，仍然加到依赖关系中，模块的包默认为unknown
+
 ## 2014.01.18, Version 1.0.33(Stable)
 
 ### bugfix
