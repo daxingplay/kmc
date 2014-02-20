@@ -1204,3 +1204,37 @@ describe('When kissy was hacked', function(){
         file.should.have.property('requires').with.lengthOf('2');
     });
 });
+
+describe('When use kissy sub modules', function(){
+    var result;
+    var inputFile = path.resolve(srcPath, 'package1/kissy-sub-module.js'),
+        outputFile = path.resolve(distPath, 'package1/kissy-sub-module.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: {
+                package1: {
+                    base: srcPath,
+                    charset: 'gbk'
+                }
+            },
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build({
+            src: inputFile,
+            dest: outputFile,
+            depPath: path.resolve(distPath, 'package1/kissy-sub-module.map.js'),
+        });
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper modules', function(){
+        var file = result.files[0];
+        console.log(file);
+        file.autoCombo['package1/kissy-sub-module'].length.should.equal(4);
+    });
+});
