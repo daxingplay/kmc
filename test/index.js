@@ -33,6 +33,7 @@ afterEach(function(){
     ModuleCompiler.clean();
 });
 
+
 describe('When clean', function(){
     it('should get an empty options', function(){
         ModuleCompiler.config({
@@ -1234,7 +1235,110 @@ describe('When use kissy sub modules', function(){
 
     it('should have proper modules', function(){
         var file = result.files[0];
-        console.log(file);
+//        console.log(file);
         file.autoCombo['package1/kissy-sub-module'].length.should.equal(4);
     });
+});
+
+describe('When build package file(eg: packageName + .js)', function(){
+
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package5/menu.js'),
+        outputFile = path.resolve(distPath, 'package5/menu.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'menu',
+                path: path.resolve(srcPath, './package5/src'),
+                charset: 'gbk',
+                ignorePackageNameInUri: true
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.name.should.equal('menu');
+        file.should.have.property('requires').with.lengthOf('1');
+    });
+
+    it('should have some modules in combo file', function(){
+        var submods = result.files[0].dependencies;
+        submods.length.should.equal(1);
+        submods[0].name.should.equal('menu/control');
+    });
+
+});
+
+describe('When package name has slash and package name ignored', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/pkgNameWithSlash.js'),
+        outputFile = path.resolve(distPath, 'package1/pkgNameWithSlash.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'test/abc',
+                path: path.resolve(srcPath, './package1'),
+                charset: 'gbk',
+                ignorePackageNameInUri: true
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.name.should.equal('test/abc/pkgNameWithSlash');
+        file.should.have.property('requires').with.lengthOf('0');
+    });
+
+});
+
+describe('When package name has slash and package name not ignored', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/pkgNameWithSlash.js'),
+        outputFile = path.resolve(distPath, 'package1/pkgNameWithSlash.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'src/package1',
+                path: path.resolve(srcPath, '../'),
+                charset: 'gbk',
+                ignorePackageNameInUri: false
+            }],
+            silent: true,
+            charset: 'gbk'
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have proper main module.', function(){
+        var file = result.files[0];
+        file.name.should.equal('src/package1/pkgNameWithSlash');
+        file.should.have.property('requires').with.lengthOf('0');
+    });
+
 });
