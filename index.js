@@ -129,7 +129,8 @@ module.exports = {
         result.success = result.files.length !== 0;
 
         if(depFile){
-            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile), utils.joinCombo(combo), outputCharset);
+            utils.writeFileSync(path.resolve(path.dirname(outputFilePath), depFile),
+                utils.joinCombo(combo,path.extname(depFile)==='.json'), outputCharset);
         }
 
         return result;
@@ -152,7 +153,7 @@ module.exports = {
 		var outputFile = outputDir ? path.resolve(outputDir,path.basename(inputFile)) : '';
         var c = new Compiler(config,outputFile);
         var result = c.analyze(inputFile);
-        content = c.combo(fixModuleName, outputDir,comboOnly);
+        content = c.combo(fixModuleName, outputDir,comboOnly,path.extname(depFileName)==='.json');
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }
