@@ -1,4 +1,4 @@
-## 2014.04.14, Version 1.0.35(Stable)
+## 2014.04.14, Version 1.0.36(Stable)
 
 ### bugfix
 
