@@ -1251,7 +1251,7 @@ describe('When build package file(eg: packageName + .js)', function(){
         ModuleCompiler.config({
             packages: [{
                 name: 'menu',
-                path: path.resolve(srcPath, './package5/src'),
+                path: path.resolve(srcPath, './package5/menu'),
                 charset: 'gbk',
                 ignorePackageNameInUri: true
             }],
