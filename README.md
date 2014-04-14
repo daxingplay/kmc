@@ -1,6 +1,6 @@
 # ModuleCompiler
 
-[![Build Status](https://secure.travis-ci.org/daxingplay/ModuleCompiler.png)](http://travis-ci.org/daxingplay/ModuleCompiler)
+[![Build Status](https://travis-ci.org/daxingplay/kmc.svg?branch=master)](https://travis-ci.org/daxingplay/kmc)
 
 [![NPM version](https://badge.fury.io/js/kmc.png)](http://badge.fury.io/js/kmc)
 
