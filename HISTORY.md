@@ -1,3 +1,9 @@
+## 2014.04.14, Version 1.0.35(Stable)
+
+### bugfix
+
+- issue #44: 修复包名.js文件模块名错误
+
 ## 2014.02.20, Version 1.0.34(Stable)
 
 ### bugfix
