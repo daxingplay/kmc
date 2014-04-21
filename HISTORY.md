@@ -1,3 +1,9 @@
+## 2014.04.21, Version 1.0.37(Stable)
+
+### bugfix
+
+- 修复windows下模块名斜线错误
+
 ## 2014.04.14, Version 1.0.36(Stable)
 
 ### bugfix
