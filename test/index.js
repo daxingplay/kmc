@@ -50,7 +50,7 @@ describe('When clean', function(){
         var config = ModuleCompiler.config();
         config.should.have.property('packages').with.lengthOf(0);
         config.should.have.property('exclude').with.lengthOf(0);
-        config.should.have.property('charset', '');
+        config.should.have.property('charset', 'utf8');
         config.should.have.property('silent', false);
     });
 });

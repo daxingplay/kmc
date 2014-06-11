@@ -165,7 +165,7 @@ module.exports = {
         this._config = {
             packages: [],
             exclude: [],
-            charset: '',
+            charset: 'utf8',
             silent: false
         };
         return true;
