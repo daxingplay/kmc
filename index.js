@@ -97,7 +97,7 @@ module.exports = {
                         dest: outputFilePath
                     });
                 }else{
-                    onsole.error('[err]'.bold.green+' cannot find input file %s ', inputFilePath);
+                    console.error('[err]'.bold.green+' cannot find input file %s ', inputFilePath);
                 }
             }
         }else if(_.isPlainObject(inputFilePath)){
