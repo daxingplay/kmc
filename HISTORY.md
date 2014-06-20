@@ -1,3 +1,9 @@
+## 2014.06.20, Version 1.0.40(Stable)
+
+### bugfix
+
+- 修复module的默认编码问题
+
 ## 2014.06.20, Version 1.0.39(Stable)
 
 ### bugfix
