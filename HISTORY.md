@@ -1,3 +1,9 @@
+## 2014.06.20, Version 1.0.39(Stable)
+
+### bugfix
+
+- 修复combo后的dep文件的模块名多一个引号的bug
+
 ## 2014.04.21, Version 1.0.37(Stable)
 
 ### bugfix
