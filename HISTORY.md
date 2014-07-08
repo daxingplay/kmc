@@ -1,3 +1,9 @@
+## 2014.07.08, Version 1.0.41(Stable)
+
+### bugfix
+
+- 修复[issue #13](https://github.com/daxingplay/grunt-kmc/issues/13)
+
 ## 2014.06.20, Version 1.0.40(Stable)
 
 ### bugfix
