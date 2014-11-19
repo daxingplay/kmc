@@ -1,3 +1,7 @@
+## 2014.11.19, Version 1.0.42(Stable)
+
+- merge pull request[#49](https://github.com/daxingplay/kmc/pull/49)
+
 ## 2014.07.08, Version 1.0.41(Stable)
 
 ### bugfix
