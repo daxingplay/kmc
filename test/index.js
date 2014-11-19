@@ -1010,6 +1010,36 @@ describe('When fix module name which package name is ignored', function(){
     });
 });
 
+describe('When fix module name with "define" format', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package-with-define/module-with-define.js'),
+        depFile = path.resolve(distPath, 'package-with-define/module-with-define-dep.js'),
+        outputDir = path.resolve(distPath, './fix-module-name-with-define');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package-with-define',
+                path: srcPath,
+                charset: 'utf-8'
+            }],
+            silent: true
+        });
+        result = ModuleCompiler.combo(inputFile, depFile, '', true, true, outputDir);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have added module names to files', function(){
+        /package\-with\-define\/module\-with\-define/
+            .test(fs.readFileSync(path.resolve(outputDir, './package-with-define/module-with-define.js')))
+            .should.equal(true);
+    });
+});
+
 describe('When pass an object as arguments for build', function(){
     var result;
 
