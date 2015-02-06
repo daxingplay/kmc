@@ -148,6 +148,7 @@ module.exports = {
             returnDependencies = inputFile.showFullResult;
             outputDir = inputFile.dest;
             inputFile = inputFile.src;
+            comboOnly = inputFile.comboOnly;
         }
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
