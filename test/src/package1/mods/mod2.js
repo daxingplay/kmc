@@ -4,7 +4,7 @@
  * @date: 12-9-26
  * @requires: kissy 1.2+
  */
-KISSY.add(function (S) {
+KISSY.add('package1/mods/mod2',function (S) {
     var D = S.DOM,
         E = S.Event,
         LOG_PRE = '[mod2] ';

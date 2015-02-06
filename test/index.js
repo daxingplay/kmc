@@ -968,6 +968,38 @@ describe('When fix module name', function(){
     });
 });
 
+describe('When fix module name', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package1/fix-module-name.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package1',
+                path: srcPath,
+                charset: 'gbk'
+            }],
+            silent: true
+        });
+        result = ModuleCompiler.info(inputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have dep content', function(){
+        result.dependencies.should.have.property('package1/fix-module-name');
+
+    });
+
+    it('should have modules content', function(){
+        result.modules.should.have.property('package1/fix-module-name');
+    });
+
+});
+
 describe('When fix module name which package name is ignored', function(){
     var result;
 

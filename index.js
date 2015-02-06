@@ -137,6 +137,14 @@ module.exports = {
 
         return result;
     },
+    info: function(inputFile){
+        var self = this;
+        self._config = parseConfig.check(self._config, inputFile);
+        var config = _.cloneDeep(self._config);
+        var c = new Compiler(config);
+        c.analyze(inputFile);
+        return c.info();
+    },
     combo: function(inputFile, depFileName, depFileCharset, fixModuleName, returnDependencies, outputDir,comboOnly){
         var self = this,
             content,
