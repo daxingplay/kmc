@@ -97,7 +97,7 @@ module.exports = {
                         dest: outputFilePath
                     });
                 }else{
-                    onsole.error('[err]'.bold.green+' cannot find input file %s ', inputFilePath);
+                    console.error('[err]'.bold.green+' cannot find input file %s ', inputFilePath);
                 }
             }
         }else if(_.isPlainObject(inputFilePath)){
@@ -156,6 +156,7 @@ module.exports = {
             returnDependencies = inputFile.showFullResult;
             outputDir = inputFile.dest;
             inputFile = inputFile.src;
+            comboOnly = inputFile.comboOnly;
         }
         self._config = parseConfig.check(self._config, inputFile);
         config = _.cloneDeep(self._config);
@@ -173,7 +174,7 @@ module.exports = {
         this._config = {
             packages: [],
             exclude: [],
-            charset: '',
+            charset: 'utf8',
             silent: false
         };
         return true;

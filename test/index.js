@@ -50,7 +50,7 @@ describe('When clean', function(){
         var config = ModuleCompiler.config();
         config.should.have.property('packages').with.lengthOf(0);
         config.should.have.property('exclude').with.lengthOf(0);
-        config.should.have.property('charset', '');
+        config.should.have.property('charset', 'utf8');
         config.should.have.property('silent', false);
     });
 });
@@ -1039,6 +1039,36 @@ describe('When fix module name which package name is ignored', function(){
     it('should have added module names to files', function(){
         /pkg1\/fix\-module\-name2/.test(fs.readFileSync(path.resolve(outputDir, './fix-module-name2.js'))).should.equal(true);
         /pkg1\/mods\/mod2/.test(fs.readFileSync(path.resolve(outputDir, './mods/mod2.js'))).should.equal(true);
+    });
+});
+
+describe('When fix module name with "define" format', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'package-with-define/module-with-define.js'),
+        depFile = path.resolve(distPath, 'package-with-define/module-with-define-dep.js'),
+        outputDir = path.resolve(distPath, './fix-module-name-with-define');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: [{
+                name: 'package-with-define',
+                path: srcPath,
+                charset: 'utf-8'
+            }],
+            silent: true
+        });
+        result = ModuleCompiler.combo(inputFile, depFile, '', true, true, outputDir);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should have added module names to files', function(){
+        /package\-with\-define\/module\-with\-define/
+            .test(fs.readFileSync(path.resolve(outputDir, './package-with-define/module-with-define.js')))
+            .should.equal(true);
     });
 });
 

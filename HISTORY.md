@@ -1,3 +1,25 @@
+## 2014.11.19, Version 1.0.42(Stable)
+
+- merge pull request[#49](https://github.com/daxingplay/kmc/pull/49)
+
+## 2014.07.08, Version 1.0.41(Stable)
+
+### bugfix
+
+- 修复[issue #13](https://github.com/daxingplay/grunt-kmc/issues/13)
+
+## 2014.06.20, Version 1.0.40(Stable)
+
+### bugfix
+
+- 修复module的默认编码问题
+
+## 2014.06.20, Version 1.0.39(Stable)
+
+### bugfix
+
+- 修复combo后的dep文件的模块名多一个引号的bug
+
 ## 2014.04.21, Version 1.0.37(Stable)
 
 ### bugfix
