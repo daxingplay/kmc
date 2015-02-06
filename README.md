@@ -153,6 +153,12 @@ kmc.combo({
 });
 ```
 
+#### 获取依赖
+
+```js
+kmc.info(inputFile) // => {modules: object, dependencies: object}
+```
+
 #### 清空配置
 
 可以清空config中的设置。因为ModuleCompiler是单例运行，所以如果出现一些特别情况，可以在config前执行clean方法清空之前的配置。
