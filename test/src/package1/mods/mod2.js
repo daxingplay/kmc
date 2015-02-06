@@ -11,7 +11,7 @@ KISSY.add(function (S) {
 
     return {
         init:function () {
-            S.log('Mod2Ò²ï¿½ï¿½GBKï¿½ï¿½ï¿½ï¿½');
+            S.log('Mod2Ò²ÊÇGBK±àÂë');
         }
     }
 });
