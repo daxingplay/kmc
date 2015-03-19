@@ -1,3 +1,7 @@
+## 2015.03.19, Version 1.2.0(Stable)
+
+- 修复主文件被package干扰导致打包为空的bug
+
 ## 2014.11.19, Version 1.0.42(Stable)
 
 - merge pull request[#49](https://github.com/daxingplay/kmc/pull/49)

@@ -13,7 +13,8 @@ var ModuleCompiler = require('../index'),
     iconv = require('iconv-lite'),
     utils = require('../lib/utils'),
     srcPath = path.resolve(__dirname, './src'),
-    distPath = path.resolve(__dirname, './dist');
+    distPath = path.resolve(__dirname, './dist'),
+    expected = path.resolve(__dirname, './dest');
 
 function removeDistDir(){
     if(fs.existsSync(distPath)){
@@ -1401,6 +1402,41 @@ describe('When package name has slash and package name not ignored', function(){
         var file = result.files[0];
         file.name.should.equal('src/package1/pkgNameWithSlash');
         file.should.have.property('requires').with.lengthOf('0');
+    });
+
+});
+
+describe('When kissy.use', function(){
+    var result;
+
+    var inputFile = path.resolve(srcPath, 'others/kissy-use.js'),
+        outputFile = path.resolve(distPath, 'others/kissy-use.js');
+
+    before(function(){
+        ModuleCompiler.config({
+            packages: {
+                pkg1: {
+                    base: path.resolve(srcPath, 'package1'),
+                    ignorePackageNameInUri: true
+                },
+                pkg2: {
+                    base: path.resolve(srcPath, 'package2'),
+                    ignorePackageNameInUri: true
+                }
+            },
+            silent: true
+        });
+        result = ModuleCompiler.build(inputFile, outputFile);
+    });
+
+    after(function(){
+        ModuleCompiler.clean();
+    });
+
+    it('should not modify anything', function(){
+        var outputContent = fs.readFileSync(outputFile).toString();
+        var expectedContent = fs.readFileSync(path.resolve(expected, 'others/kissy-use.js')).toString();
+        outputContent.should.equal(expectedContent);
     });
 
 });
