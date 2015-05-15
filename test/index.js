@@ -1440,3 +1440,18 @@ describe('When kissy.use', function(){
     });
 
 });
+
+
+describe('add module name', function(){
+
+    var compiler = require('../lib/compiler');
+
+    it('should have module name added.', function(){
+        var moduleContent = 'KISSY.add( function(S){})';
+        var mod = {
+            name: 'test'
+        };
+        compiler.prototype._addModuleName(moduleContent, mod).should.equal("KISSY.add('test', function(S){})");
+    });
+
+});
