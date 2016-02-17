@@ -1,5 +1,7 @@
 # ModuleCompiler
 
+[![Join the chat at https://gitter.im/daxingplay/kmc](https://badges.gitter.im/daxingplay/kmc.svg)](https://gitter.im/daxingplay/kmc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/daxingplay/kmc.svg?branch=master)](https://travis-ci.org/daxingplay/kmc)
 
 [![NPM version](https://badge.fury.io/js/kmc.png)](http://badge.fury.io/js/kmc)
