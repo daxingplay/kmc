@@ -164,7 +164,7 @@ module.exports = {
 		var outputFile = outputDir ? path.resolve(outputDir,path.basename(inputFile)) : '';
         var c = new Compiler(config,outputFile);
         var result = c.analyze(inputFile);
-        content = c.combo(fixModuleName, outputDir,comboOnly,path.extname(depFileName)==='.json');
+        content = c.combo(fixModuleName, outputDir,comboOnly,path.extname(depFileName || '')==='.json');
         if(content && depFileName){
             utils.writeFileSync(depFileName, content, depFileCharset);
         }
